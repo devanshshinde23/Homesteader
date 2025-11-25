@@ -1,5 +1,7 @@
 package com.example.demo.Controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,10 +40,11 @@ public class HomeController {
 	}
 	
 	@PostMapping("/checkAdminData")
-	public String CheckAdminData(@RequestParam("username") String u, @RequestParam("password") String p)
+	public String CheckAdminData(@RequestParam("username") String u, @RequestParam("password") String p,HttpSession s1)
 	{
 		Admin ad=as.checkAdminData(u,p);
 		if(ad!=null) {
+			s1.setAttribute("temp", ad.getAusername());
 			return "redirect:/AdminDash";
 		}
 		return "adminLogin";
@@ -49,9 +52,18 @@ public class HomeController {
 	}
 	
 	@GetMapping("/AdminDash")
-	public String AdminDash()
+	public String AdminDash(HttpSession s1 )
 	{
-		return "AdminDash";
+		if(s1.getAttribute("temp")!=null) {
+			return "AdminDash";
+		}
+		return "redirect:/adminLogin";
+	}
+	
+	@GetMapping("/FLogout")
+	public String flogout(HttpSession s1 ) {
+		s1.invalidate();
+		return "redirect:/adminLogin";
 	}
 	
 }
