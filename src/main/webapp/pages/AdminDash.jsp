@@ -78,10 +78,13 @@
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-dark bg-success fixed-top">
+
+	
     <div class="container-fluid">
         <span class="navbar-brand"><i class="fa-solid fa-leaf"></i> Homesteader Admin Dashboard</span>
-        <button class="btn btn-light btn-sm">Logout</button>
+        <a  href="FLogout" class="btn btn-light btn-sm">Logout</a>
     </div>
+   
 </nav>
 
 <!-- SIDEBAR -->
@@ -90,7 +93,8 @@
     <a href="#"><i class="fa-solid fa-chart-line me-2"></i> Dashboard</a>
 
     
-    <a href="#"><i class="fa-solid fa-user-plus me-2"></i> Register Sub Admin</a>
+     <a href="Viewfarmer"><i class="fa-solid fa-building me-2"></i> View Farmers </a>
+    
     <a href="#"><i class="fa-solid fa-building me-2"></i> View Agro Agencies</a>
 
     <hr>

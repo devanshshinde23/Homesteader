@@ -40,7 +40,7 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="/farmerLogin">Farmer Login</a></li>
+                        <li><a class="dropdown-item" href="/FarmerLogin">Farmer Login</a></li>
                         <li><a class="dropdown-item" href="/adminLogin">Admin Login</a></li>
                         <li><a class="dropdown-item" href="/agencyLogin">Agency Login</a></li>
                     </ul>
