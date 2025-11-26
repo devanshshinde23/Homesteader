@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agro Admin Dashboard</title>
+    <title>HomeSteader Admin Dashboard</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -95,7 +95,7 @@
     
      <a href="Viewfarmer"><i class="fa-solid fa-building me-2"></i> View Farmers </a>
     
-    <a href="#"><i class="fa-solid fa-building me-2"></i> View Agro Agencies</a>
+    <a href="ViewAgroAgencies"><i class="fa-solid fa-building me-2"></i> View Agro Agencies</a>
 
     <hr>
 

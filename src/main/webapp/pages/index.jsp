@@ -42,7 +42,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/FarmerLogin">Farmer Login</a></li>
                         <li><a class="dropdown-item" href="/adminLogin">Admin Login</a></li>
-                        <li><a class="dropdown-item" href="/agencyLogin">Agency Login</a></li>
+                        <li><a class="dropdown-item" href="/AgenciesLogin">Agency Login</a></li>
                     </ul>
                 </li>
                 <!-- ⭐ Login Dropdown END -->
@@ -56,7 +56,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/farmerRegister">Farmer Register</a></li>
                         <li><a class="dropdown-item" href="/adminRegister">Admin Register</a></li>
-                        <li><a class="dropdown-item" href="/agencyRegister">Agency Register</a></li>
+                        <li><a class="dropdown-item" href="/AgenciesRegistration">Agency Register</a></li>
                     </ul>
                 </li>
 
