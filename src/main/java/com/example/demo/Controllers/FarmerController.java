@@ -42,8 +42,10 @@ public class FarmerController {
 	}
 	
 	@GetMapping("/FarmerDash")
-	public String Farmerdash(HttpSession s1) {
+	public String Farmerdash(HttpSession s1, Model m) {
 		if(s1.getAttribute("temp")!=null) {
+//			Farmer FD=(Farmer)s1.getAttribute("temp");
+//			m.addAttribute("kk", FD);
 			return "FarmerDash";
 		}
 		return "redirect:/FarmerLogin";
@@ -67,12 +69,36 @@ public class FarmerController {
 		return "redirect:/FarmerLogin";
 	}
 	
+//	@GetMapping("/Viewfarmer")
+//	public String viewFarmer(Model m) {
+//		List<Farmer> ll=ff.Display();
+//		m.addAttribute("temp",ll);
+//		m.addAttribute("showFarmers", true);
+//		return "AdminDash";
+//	}
+	
 	@GetMapping("/Viewfarmer")
-	public String viewFarmer(Model m) {
-		List<Farmer> ll=ff.Display();
-		m.addAttribute("temp",ll);
-		return "Viewfarmer";
+	public String viewFarmer(HttpSession session, Model model) {
+
+	    Boolean showFarmers = (Boolean) session.getAttribute("showFarmers");
+
+	    // toggle logic
+	    if (showFarmers == null || showFarmers == false) {
+	        showFarmers = true;
+	        model.addAttribute("temp", ff.Display()); // load data only when showing
+	    } else {
+	        showFarmers = false;
+	    }
+
+	    session.setAttribute("showFarmers", showFarmers);
+	    model.addAttribute("showFarmers", showFarmers);
+
+	    return "AdminDash";
 	}
+	
+	
+	
+	
 	
 	
 	

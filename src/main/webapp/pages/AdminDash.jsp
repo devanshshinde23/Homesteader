@@ -1,228 +1,345 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HomeSteader Admin Dashboard</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HomeSteader Admin Dashboard</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        body {
-            background-color: #f4f6f9;
-            font-family: "Segoe UI", sans-serif;
-        }
+<style>
+body {
+	background-color: #f4f6f9;
+	font-family: "Segoe UI", sans-serif;
+}
 
-        /* Sidebar Style */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 260px;
-            height: 100vh;
-            background-color: #1e3a2a;
-            padding-top: 80px;
-            color: #fff;
-            overflow-y: auto;
-        }
+/* Sidebar Style */
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 260px;
+	height: 100vh;
+	background-color: #1e3a2a;
+	padding-top: 80px;
+	color: #fff;
+	overflow-y: auto;
+}
 
-        .sidebar a {
-            display: block;
-            padding: 12px 20px;
-            font-size: 15px;
-            color: #d1fae5;
-            text-decoration: none;
-        }
+.sidebar a {
+	display: block;
+	padding: 12px 20px;
+	font-size: 15px;
+	color: #d1fae5;
+	text-decoration: none;
+}
 
-        .sidebar a:hover {
-            background-color: #14532d;
-            color: #fff;
-        }
+.sidebar a:hover {
+	background-color: #14532d;
+	color: #fff;
+}
 
-        .sidebar hr {
-            border-color: #2f5f44;
-        }
+.sidebar hr {
+	border-color: #2f5f44;
+}
 
-        /* Content Area */
-        .content {
-            margin-left: 260px;
-            padding: 20px;
-        }
+/* Content Area */
+.content {
+	margin-left: 260px;
+	padding: 20px;
+}
 
-        .card {
-            border-radius: 12px;
-        }
+.card {
+	border-radius: 12px;
+}
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 22px;
-        }
+.navbar-brand {
+	font-weight: bold;
+	font-size: 22px;
+}
 
-        .table thead {
-            background-color: #198754;
-            color: white;
-        }
-        
-        .mb-4 {
-        padding : 50px;
-        
-        }
-    </style>
+.table thead {
+	background-color: #198754;
+	color: white;
+}
+
+.mb-4 {
+	padding: 50px;
+}
+
+<!--
+Table css --> /* Dark overlay */ .overlay {
+	background: rgba(0, 0, 0, 0.55);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+.container-box {
+	background: rgba(255, 255, 255, 0.20);
+	padding: 25px;
+	border-radius: 15px;
+	backdrop-filter: blur(12px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.table {
+	background-color: rgba(255, 255, 255, 0.85);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.table th {
+	background-color: #007bff;
+	color: white;
+	text-align: center;
+}
+
+.table-hover tbody tr:hover {
+	background-color: #d9ecff;
+	transform: scale(1.01);
+	transition: 0.2s ease-in-out;
+}
+
+.btn-outline-primary:hover {
+	background-color: #007bff;
+	color: white;
+}
+
+.btn-outline-danger:hover {
+	background-color: #dc3545;
+	color: white;
+}
+
+.search-box {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+</style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-dark bg-success fixed-top">
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-dark bg-success fixed-top">
 
-	
-    <div class="container-fluid">
-        <span class="navbar-brand"><i class="fa-solid fa-leaf"></i> Homesteader Admin Dashboard</span>
-        <a  href="FLogout" class="btn btn-light btn-sm">Logout</a>
-    </div>
-   
-</nav>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
+		<div class="container-fluid">
+			<span class="navbar-brand"><i class="fa-solid fa-leaf"></i>
+				Homesteader Admin Dashboard</span> <a href="FLogout"
+				class="btn btn-light btn-sm">Logout</a>
+		</div>
 
-    <a href="#"><i class="fa-solid fa-chart-line me-2"></i> Dashboard</a>
+	</nav>
 
-    
-     <a href="Viewfarmer"><i class="fa-solid fa-building me-2"></i> View Farmers </a>
-    
-    <a href="ViewAgroAgencies"><i class="fa-solid fa-building me-2"></i> View Agro Agencies</a>
+	<!-- SIDEBAR -->
+	<div class="sidebar">
 
-    <hr>
+		<a href="#"><i class="fa-solid fa-chart-line me-2"></i> Dashboard</a>
 
-    <a href="#"><i class="fa-solid fa-wheat-awn me-2"></i> Add Crops Info</a>
-    <a href="#"><i class="fa-solid fa-leaf me-2"></i> Add Herbs Info</a>
-    <a href="#"><i class="fa-solid fa-carrot me-2"></i> Add Vegetables Info</a>
-    <a href="#"><i class="fa-solid fa-seedling me-2"></i> Add Seeds Info</a>
-    <a href="#"><i class="fa-solid fa-apple-whole me-2"></i> Add Fruits Info</a>
-    <a href="#"><i class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a>
 
-    <a href="#"><i class="fa-solid fa-indian-rupee-sign me-2"></i> Update Market Prices</a>
-    <a href="#"><i class="fa-solid fa-cloud-sun-rain me-2"></i> Add Climate Changes</a>
-    <a href="#"><i class="fa-solid fa-mountain-sun me-2"></i> Add Soil Analysis</a>
+		<a href="${pageContext.request.contextPath}/Viewfarmer"><i
+			class="fa-solid fa-building me-2"></i> View Farmers </a> <a
+			href="ViewAgroAgencies"><i class="fa-solid fa-building me-2"></i>
+			View Agro Agencies</a>
 
-    <a href="#"><i class="fa-solid fa-comments me-2"></i> Farmer Feedback</a>
+		<hr>
 
-    <hr>
+		<a href="#"><i class="fa-solid fa-wheat-awn me-2"></i> Add Crops
+			Info</a> <a href="#"><i class="fa-solid fa-leaf me-2"></i> Add Herbs
+			Info</a> <a href="#"><i class="fa-solid fa-carrot me-2"></i> Add
+			Vegetables Info</a> <a href="#"><i class="fa-solid fa-seedling me-2"></i>
+			Add Seeds Info</a> <a href="#"><i
+			class="fa-solid fa-apple-whole me-2"></i> Add Fruits Info</a> <a href="#"><i
+			class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a> <a href="#"><i
+			class="fa-solid fa-indian-rupee-sign me-2"></i> Update Market Prices</a>
+		<a href="#"><i class="fa-solid fa-cloud-sun-rain me-2"></i> Add
+			Climate Changes</a> <a href="#"><i
+			class="fa-solid fa-mountain-sun me-2"></i> Add Soil Analysis</a> <a
+			href="#"><i class="fa-solid fa-comments me-2"></i> Farmer
+			Feedback</a>
 
-    <a href="#"><i class="fa-solid fa-calendar-day me-2"></i> Daily Reports</a>
-    <a href="#"><i class="fa-solid fa-calendar-week me-2"></i> Weekly Reports</a>
-    <a href="#"><i class="fa-solid fa-calendar-days me-2"></i> Monthly Reports</a>
-    <a href="#"><i class="fa-solid fa-file-excel me-2"></i> Download Excel Report</a>
+		<hr>
 
-</div>
+		<a href="#"><i class="fa-solid fa-calendar-day me-2"></i> Daily
+			Reports</a> <a href="#"><i class="fa-solid fa-calendar-week me-2"></i>
+			Weekly Reports</a> <a href="#"><i
+			class="fa-solid fa-calendar-days me-2"></i> Monthly Reports</a> <a
+			href="#"><i class="fa-solid fa-file-excel me-2"></i> Download
+			Excel Report</a>
 
-<!-- MAIN CONTENT -->
-<div class="content mt-4">
+	</div>
 
-    <h2 class="mb-4">Dashboard Overview</h2>
+	<!-- MAIN CONTENT -->
+	<div class="content mt-4">
 
-    <!-- TOP CARDS -->
-    <div class="row">
+		<h2 class="mb-4">Dashboard Overview</h2>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h6>Total Agro Agencies</h6>
-                <h3><i class="fa-solid fa-building me-2"></i> 32</h3>
-            </div>
-        </div>
+		<!-- TOP CARDS -->
+		<div class="row">
 
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h6>New Farmer Feedback</h6>
-                <h3><i class="fa-solid fa-comments me-2"></i> 18</h3>
-            </div>
-        </div>
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3">
+					<h6>Total Agro Agencies</h6>
+					<h3>
+						<i class="fa-solid fa-building me-2"></i> 32
+					</h3>
+				</div>
+			</div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h6>Pending Soil Reports</h6>
-                <h3><i class="fa-solid fa-mountain-sun me-2"></i> 7</h3>
-            </div>
-        </div>
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3">
+					<h6>New Farmer Feedback</h6>
+					<h3>
+						<i class="fa-solid fa-comments me-2"></i> 18
+					</h3>
+				</div>
+			</div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3">
-                <h6>Market Price Updates</h6>
-                <h3><i class="fa-solid fa-indian-rupee-sign me-2"></i> 5</h3>
-            </div>
-        </div>
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3">
+					<h6>Pending Soil Reports</h6>
+					<h3>
+						<i class="fa-solid fa-mountain-sun me-2"></i> 7
+					</h3>
+				</div>
+			</div>
 
-    </div>
+			<div class="col-md-3">
+				<div class="card shadow-sm p-3">
+					<h6>Market Price Updates</h6>
+					<h3>
+						<i class="fa-solid fa-indian-rupee-sign me-2"></i> 5
+					</h3>
+				</div>
+			</div>
 
-    <!-- TABLE SECTION -->
-    <div class="card mt-4 shadow-sm">
-        <div class="card-header bg-success text-white">
-            Recently Added Crop Information
-        </div>
+		</div>
 
-        <div class="card-body">
 
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Crop Name</th>
-                        <th>Category</th>
-                        <th>Region</th>
-                        <th>Updated By</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+		<c:if test="${showFarmers}">
+			<div class="overlay"></div>
 
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Wheat</td>
-                        <td>Grain</td>
-                        <td>Pune</td>
-                        <td>Admin</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>
+			<div class="container mt-5">
+				<div class="container-box">
 
-                    <tr>
-                        <td>2</td>
-                        <td>Tomato</td>
-                        <td>Vegetable</td>
-                        <td>Satara</td>
-                        <td>Sub Admin</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>
+					<h2 class="text-center text-black  mb-4">Farmer Registration
+						Records</h2>
 
-                    <tr>
-                        <td>3</td>
-                        <td>Turmeric</td>
-                        <td>Herb</td>
-                        <td>Nagpur</td>
-                        <td>Admin</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
+					<div class="search-box">
+						<input type="text" name="sdob" class="form-control" id="dob"
+							placeholder="Search by Region">
+						<button type="submit" class="btn btn-light">Find</button>
+					</div>
 
-            </table>
+					<table class="table table-bordered table-hover text-center">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Farmer Name</th>
+								<th>Email</th>
+								<th>Mobile</th>
+								<th>Village</th>
+								<th>Username</th>
+								<th>Action</th>
+							</tr>
+						</thead>
 
-        </div>
-    </div>
+						<tbody>
+							<c:forEach items="${temp}" var="e">
+								<tr>
+									<td><c:out value="${e.fid}" /></td>
+									<td><c:out value="${e.fname}" /></td>
+									<td><c:out value="${e.femail}" /></td>
+									<td><c:out value="${e.fMobileNo}" /></td>
+									<td><c:out value="${e.fregion}" /></td>
+									<td><c:out value="${e.fusername}" /></td>
 
-</div>
+									<td><a href="EditData/${e.fid}"
+										class="btn btn-outline-primary btn-sm">Edit</a> <a
+										href="Deletedata/${e.fid}"
+										class="btn btn-outline-danger btn-sm">Delete</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+
+					</table>
+
+				</div>
+			</div>
+		</c:if>
+
+		<c:if test="${ShowAgency }">
+			<div class="overlay"></div>
+
+			<div class="container mt-5">
+				<div class="container-box">
+
+					<h2 class="text-center text-black mb-4">Agro Agencies Records</h2>
+
+					<div class="search-box">
+						<input type="text" name="sdob" class="form-control" id="dob"
+							placeholder="Search by Region">
+						<button type="submit" class="btn btn-light">Find</button>
+					</div>
+
+					<table class="table table-bordered table-hover text-center">
+
+						<thead>
+							<tr>
+								<td>Id</td>
+								<td>Agency Name</td>
+								<td>Owner Name</td>
+								<td>Register No</td>
+								<td>Agency Type</td>
+								<td>MOB_NO</td>
+								<td>Address</td>
+								<td>UserName</td>
+								<td>Action </td>
+							</tr>
+
+						</thead>
+
+						<tbody>
+							<c:forEach items="${temp}" var="e">
+								<tr>
+									<td><c:out value="${e.aid}" /></td>
+									<td><c:out value="${e.aname}" /></td>
+									<td><c:out value="${e.aownerName}" /></td>
+									<td><c:out value="${e.aregisterNo}" /></td>
+									<td><c:out value="${e.atype}" /></td>
+									<td><c:out value="${e.amobno}" /></td>
+									<td><c:out value="${e.aaddress}" /></td>
+									<td><c:out value="${e.ausername }"></c:out></td>
+
+									<td><a href="EditData/${e.aid}"
+										class="btn btn-outline-primary btn-sm">Edit</a> <a
+										href="Deletedata/${e.aid}"
+										class="btn btn-outline-danger btn-sm">Delete</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</c:if>
+
+	</div>
 
 </body>
 </html>

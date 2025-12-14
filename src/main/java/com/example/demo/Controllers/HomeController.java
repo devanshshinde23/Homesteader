@@ -14,6 +14,7 @@ import com.example.demo.Model.Admin;
 import com.example.demo.Service.AdminService;
 
 @Controller
+
 public class HomeController {
 
 	@Autowired
