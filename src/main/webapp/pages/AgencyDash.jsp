@@ -92,10 +92,10 @@
 
     <!-- Topbar -->
     <div class="topbar d-flex justify-content-between align-items-center">
-        <h4 class="fw-bold">Welcome, Agro Agency</h4>
+        <h4 class="fw-bold">Welcome, ${user.aname }</h4>
 
         <div class="d-flex align-items-center">
-            <a href="AgencyData"class="me-3 fw-bold">Agency Profile</a>
+            <a href="AgencyData/${user.aname }"class="me-3 fw-bold">Agency Profile</a>
             <i class="bi bi-person-circle fs-3 text-primary"></i>
         </div>
     </div>

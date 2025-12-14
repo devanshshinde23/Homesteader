@@ -1,12 +1,16 @@
 package com.example.demo.Controllers;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,10 +22,7 @@ public class AgroAgenciesController {
 
 	@Autowired 
 	AgenciesService as;
-	@GetMapping("/ViewAgroAgencies")
-	public String ViewAgro() {
-		return "ViewAgroAgencies";
-	}
+	
 	
 	@GetMapping("/AgenciesRegistration")
 	public String Areg() {
@@ -55,9 +56,17 @@ public class AgroAgenciesController {
 	}
 	
 	@GetMapping("/AgencyDash")
-	public String agencydash(HttpSession s1 ) {
+	public String agencydash(HttpSession s1 , Model m ) {
+		
+		
 		if(s1.getAttribute("temp")!=null) {
+			String x =(String)s1.getAttribute("temp");
+			
+			m.addAttribute("xx",x);
+			
 			return "AgencyDash";
+			
+			
 		}
 		return "AgenciesLogin";
 	}
@@ -68,5 +77,33 @@ public class AgroAgenciesController {
 		return "redirect:/AgenciesLogin";
 	}
 	
+	
+	@GetMapping("/AgencyData/{aname}")
+	public String AgencyData(@PathVariable String aname,HttpSession s1 , Model m) {
+		as.fetchSingleRecord(aname);
+		String ag =(String ) s1.getAttribute("temp");
+		m.addAttribute("user", ag);
+		return "AgencyData";
+	}
+	
+	// Toggal Logic 
+	@GetMapping("/ViewAgroAgencies")
+	public String ViewAgencyData(HttpSession Session ,Model m) {
+		
+		Boolean ShowAgency =(Boolean) Session.getAttribute("ShowAgency");
+		
+		if(ShowAgency == null || ShowAgency == false) {
+			ShowAgency = true;
+			
+			m.addAttribute("temp", as.ADisplay());
+		}else {
+			ShowAgency =false;
+			
+		}
+		
+		Session.setAttribute("ShowAgency", ShowAgency);
+		m.addAttribute("ShowAgency",ShowAgency);
+		return("AdminDash");
+	}
 	
 }

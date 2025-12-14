@@ -8,5 +8,7 @@ public interface AgenciesRepo extends JpaRepository<Agencies,Integer>{
 
 	Agencies findByAusernameAndApassword(String u, String p);
 	
+	Agencies findByAname(String u);
+	
 	
 }

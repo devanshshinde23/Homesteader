@@ -2,6 +2,8 @@ package com.example.demo.Dao;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,34 @@ public class AgenciesDao implements AgenciesService{
 		Agencies ca= ar.findByAusernameAndApassword(u, p);
 		return ca;
 	}
+
+	@Override
+	public Agencies Display() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Agencies fetchSingleRecord(String name) {
+		Agencies ad=ar.findByAname(name);
+		
+		return ad;
+		
+	}
+
+	@Override
+	public Agencies findByUsername(String x) {
+		Agencies ag = ar.findByAname(x);
+		
+		return ag;
+	}
+
+	@Override
+	public List<Agencies> ADisplay() {
+		return ar.findAll();
+	}
+
+	
 
 	
 
