@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Model.Farmer;
+import com.example.demo.Model.Crop;
 import com.example.demo.Service.FarmerService;
 
 @Controller
@@ -27,6 +28,8 @@ public class FarmerController {
 	public String FarmerLogin(HttpSession s1){
 		return "FarmerLogin";
 	}
+	
+	
 	
 	@GetMapping("/farmerRegister")
 	public String Register() {
@@ -57,6 +60,7 @@ public class FarmerController {
 		Farmer fk =ff.CheckFarmerData(u,p);
 		
 		if(fk!=null) {
+			s1.setAttribute("fid", fk.getFid());
 			s1.setAttribute("temp", fk.getFname());
 			return "redirect:/FarmerDash";
 		}
@@ -95,6 +99,8 @@ public class FarmerController {
 
 	    return "AdminDash";
 	}
+	
+	
 	
 	
 	

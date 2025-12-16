@@ -107,7 +107,7 @@
             <td><c:out value="${e.fusername}" /></td>
 
             <td>
-              <a href="EditData/${e.fid}" class="btn btn-outline-primary btn-sm">Edit</a>
+              <a href="EditData/${e.fid}" class="btn btn-outline-primary btn-sm">View</a>
               <a href="Deletedata/${e.fid}" class="btn btn-outline-danger btn-sm">Delete</a>
             </td>
           </tr>
