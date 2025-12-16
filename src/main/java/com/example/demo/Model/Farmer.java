@@ -1,11 +1,20 @@
 package com.example.demo.Model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 @Entity
+@Table(name="farmer")
 public class Farmer {
 
 	@Id
@@ -18,7 +27,19 @@ public class Farmer {
 	private String fusername;
 	
 	private String fpassword;
+	@Transient  // Not store in database 
 	private String fcpassword;
+	
+	public List<Crop> getCrops() {
+		return crops;
+	}
+	public void setCrops(List<Crop> crops) {
+		this.crops = crops;
+	}
+
+	@OneToMany(mappedBy = "farmer", cascade = CascadeType.ALL)
+	private List<Crop> crops;
+	
 	public String getFcpassword() {
 		return fcpassword;
 	}
