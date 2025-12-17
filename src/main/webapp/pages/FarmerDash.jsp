@@ -104,7 +104,7 @@
         <h4 class="text-center mb-4"> Farmer Panel</h4>
         <a href="#"><i class="fa-solid fa-table-columns me-2"></i>Dashboard</a>
         <a href="AddCrop"><i class="fa-solid fa-seedling me-2"></i>Add Crop</a>
-        <a href="#"><i class="fa-solid fa-shop me-2"></i>Sell Produce</a>
+        <a href="AddHerbs"><i class="fa-solid fa-shop me-2"></i>Add Herbs </a>
         <a href="#"><i class="fa-solid fa-cloud-sun me-2"></i>Weather</a>
         <a href="#"><i class="fa-solid fa-landmark me-2"></i>Govt Schemes</a>
         <a href="#"><i class="fa-solid fa-headset me-2"></i>Support</a>
