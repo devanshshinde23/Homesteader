@@ -95,36 +95,34 @@ input:focus, textarea:focus, select:focus {
 
             <div class="card shadow-lg">
                 <div class="card-header text-white text-center">
-                    <h3>🌿 Add Herbs</h3>
-                    
-                    
+                    <h3>🌱 Add Seeds</h3>
                 </div>
 
                 <div class="card-body p-4">
 
                     <!-- NORMAL HTML FORM -->
-                    <form action="saveHerbs" method="post">
+                    <form action="saveSeed" method="post">
 
                         <!-- Herb Name -->
                         <div class="mb-3">
-                            <label class="form-label">Herb Name</label>
+                            <label class="form-label">Seed Name</label>
                             <input type="text"
-                                   name="herbName"
+                                   name="seedName"
                                    class="form-control"
-                                   placeholder="Enter herb name"
+                                   placeholder="Enter Seed Name"
                                    required>
                         </div >
 							
-							<div class="mb-3">
-							<label class="form-label">Category </label> 
-							<select id="category" name="category">
-								<option value="Medicinal">Medicinal</option>
-								<option value="Culinary">Culinary</option>
-								<option value="Aromatic">Aromatic</option>
-							</select>
-						
-						
-						</div>
+							<!-- Crop Type -->
+		                <div class="mb-3">
+		                    <label class="form-label">Seed Type</label>
+		                    <select name="category" class="form-control" required>
+		                        <option value="">--Select--</option>
+		                        <option value="Kharif">Kharif</option>
+		                        <option value="Rabi">Rabi</option>
+		                        <option value="Zaid">Zaid</option>
+		                    </select>
+		                </div>
                         <!-- Quantity -->
                         <div class="mb-3">
                             <label class="form-label">Quantity (Kg)</label>
@@ -148,7 +146,7 @@ input:focus, textarea:focus, select:focus {
                         <!-- Submit Button -->
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-success">
-                                Save Herbs
+                                Save Seed
                             </button>
                         </div>
 

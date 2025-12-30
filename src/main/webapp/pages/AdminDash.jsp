@@ -159,14 +159,13 @@ Table css --> /* Dark overlay */ .overlay {
 
 		<hr>
 
-		<a href="#"><i class="fa-solid fa-wheat-awn me-2"></i> Add Crops
-			Info</a> <a href="#"><i class="fa-solid fa-leaf me-2"></i> Add Herbs
-			Info</a> <a href="#"><i class="fa-solid fa-carrot me-2"></i> Add
-			Vegetables Info</a> <a href="#"><i class="fa-solid fa-seedling me-2"></i>
-			Add Seeds Info</a> <a href="#"><i
-			class="fa-solid fa-apple-whole me-2"></i> Add Fruits Info</a> <a href="#"><i
-			class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a> <a href="#"><i
-			class="fa-solid fa-indian-rupee-sign me-2"></i> Update Market Prices</a>
+		<a href="#"><i class="fa-solid fa-wheat-awn me-2"></i> Add Crops Info</a> 
+		<a href="#"><i class="fa-solid fa-leaf me-2"></i> Add Herbs Info</a>
+			 <a href="#"><i class="fa-solid fa-carrot me-2"></i> Add Vegetables Info</a> 
+			<a href="#"><i class="fa-solid fa-seedling me-2"></i>Add Seeds Info</a> 
+			<a href="#"><i	class="fa-solid fa-apple-whole me-2"></i> Add Fruits Info</a>
+			 <a href="#"><i		class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a> 
+			 <a href="#"><i	class="fa-solid fa-indian-rupee-sign me-2"></i> Update Market Prices</a>
 		<a href="#"><i class="fa-solid fa-cloud-sun-rain me-2"></i> Add
 			Climate Changes</a> <a href="#"><i
 			class="fa-solid fa-mountain-sun me-2"></i> Add Soil Analysis</a> <a
