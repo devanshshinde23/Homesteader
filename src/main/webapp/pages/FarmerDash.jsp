@@ -106,7 +106,7 @@
         <a href="AddCrop"><i class="fa-solid fa-wheat-awn me-2"></i>Add Crop</a>
         <a href="AddHerbs"><i class="fa-solid fa-leaf me-2"></i>Add Herbs </a>
         <a href="AddSeeds"><i class="fa-solid fa-seedling me-2"></i>Add Seeds Info</a>
-         <a href="#"><i	class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a>
+         <a href="AddFertilizer"><i	class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a>
          
         <a href="#"><i class="fa-solid fa-cloud-sun me-2"></i>Weather</a>
         <a href="#"><i class="fa-solid fa-landmark me-2"></i>Govt Schemes</a>
