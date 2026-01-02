@@ -2,6 +2,8 @@ package com.example.demo.Model;
 
 import javax.persistence.*;
 
+import lombok.ToString;
+
 @Entity
 @Table(name = "crop")
 public class Crop {
@@ -22,6 +24,7 @@ public class Crop {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "fid", nullable = false)
+    @ToString.Exclude
     private Farmer farmer;
 
     // Getters & Setters

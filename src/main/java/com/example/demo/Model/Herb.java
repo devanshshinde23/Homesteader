@@ -1,6 +1,8 @@
 package com.example.demo.Model;
 
-import javax.persistence.*; 
+import javax.persistence.*;
+
+import lombok.ToString; 
 
 @Entity
 @Table(name="herb")
@@ -26,7 +28,7 @@ public class Herb {
 	 @Override
 	public String toString() {
 		return "Herb [herbid=" + herbid + ", herbName=" + herbName + ", quantity=" + quantity + ", price=" + price
-				+ ", category=" + category + ", farmer=" + farmer + "]";
+				+ ", category=" + category +  "]";
 	}
 
 
@@ -92,6 +94,7 @@ public class Herb {
 
 	 @ManyToOne(optional = false)
 	    @JoinColumn(name = "fid", nullable = false)
+	 @ToString.Exclude
 	    private Farmer farmer;
 	
 	

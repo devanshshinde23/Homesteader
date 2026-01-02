@@ -50,6 +50,12 @@ public class FarmerDao implements FarmerService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public Farmer getFarmerDetails(int fid) {
+		
+		
+		return fr.findById(fid).orElseThrow(()-> new RuntimeException("Farmer Not found "));
+	}
 	
 
 }

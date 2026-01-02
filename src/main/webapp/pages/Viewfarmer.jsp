@@ -71,20 +71,22 @@
 
 <body>
 
-<div class="overlay"></div>
+<div class="overlay">
 
   <div class="container mt-5">
     <div class="container-box">
 
       <h2 class="text-center text-white mb-4">Farmer Registration Records</h2>
 
-      <div class="search-box">
-        <input type="text" name="sdob" class="form-control" id="dob" placeholder="Search by Region">
-        <button type="submit" class="btn btn-light">Find</button>
-      </div>
-
+	<form action="FindByVillage" method="post">
+      
+        <input type="text" name="x" class="form-control"  placeholder="Search by Village ">
+        <button type="submit" class="btn btn-outline-primary btn-sm">Find</button>
+      
+	</form> 
+	
       <table class="table table-bordered table-hover text-center">
-        <thead>
+        <thead >
           <tr>
             <th>ID</th>
             <th>Farmer Name</th>
@@ -117,7 +119,7 @@
       </table>
     </div>
   </div>
-
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

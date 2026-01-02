@@ -21,6 +21,8 @@ public interface FarmerService {
 
 	public Farmer login(String username, String password);
 	
+	public Farmer getFarmerDetails(int fid );
+	
 	
 
 }

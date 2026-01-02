@@ -268,7 +268,7 @@ Table css --> /* Dark overlay */ .overlay {
 									<td><c:out value="${e.fregion}" /></td>
 									<td><c:out value="${e.fusername}" /></td>
 
-									<td><a href="EditData/${e.fid}"
+									<td><a href="FarmerDetails/${e.fid}"
 										class="btn btn-outline-primary btn-sm">View</a> <a
 										href="Deletedata/${e.fid}"
 										class="btn btn-outline-danger btn-sm">Delete</a></td>

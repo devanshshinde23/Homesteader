@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,16 +31,48 @@ public class Farmer {
 	@Transient  // Not store in database 
 	private String fcpassword;
 	
+	
+
+	@OneToMany(mappedBy = "farmer", cascade = CascadeType.ALL , orphanRemoval = true )
+	private List<Seed> seeds = new ArrayList<>();
+	
+	
+	@OneToMany(mappedBy = "farmer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Crop> crops = new ArrayList<>();
+	
+	@OneToMany(mappedBy ="farmer" , cascade = CascadeType.ALL , orphanRemoval = true)
+	private List<Herb> herbs = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "farmer" , cascade = CascadeType.ALL , orphanRemoval = true  )
+	private List<Fertilizer> fertilizer = new ArrayList<>();
+	
 	public List<Crop> getCrops() {
 		return crops;
 	}
 	public void setCrops(List<Crop> crops) {
 		this.crops = crops;
 	}
-
-	@OneToMany(mappedBy = "farmer", cascade = CascadeType.ALL)
-	private List<Crop> crops;
 	
+	public List<Seed> getSeeds() {
+		return seeds;
+	}
+	public void setSeeds(List<Seed> seeds) {
+		this.seeds = seeds;
+	}
+	
+	
+	public List<Herb> getHerbs() {
+		return herbs;
+	}
+	public void setHerbs(List<Herb> herbs) {
+		this.herbs = herbs;
+	}
+	public List<Fertilizer> getFertilizer() {
+		return fertilizer;
+	}
+	public void setFertilizer(List<Fertilizer> fertilizer) {
+		this.fertilizer = fertilizer;
+	}
 	public String getFcpassword() {
 		return fcpassword;
 	}
@@ -88,13 +121,15 @@ public class Farmer {
 	public void setFpassword(String fpassword) {
 		this.fpassword = fpassword;
 	}
-	
 	@Override
 	public String toString() {
 		return "Farmer [fid=" + fid + ", fname=" + fname + ", fMobileNo=" + fMobileNo + ", femail=" + femail
 				+ ", fregion=" + fregion + ", fusername=" + fusername + ", fpassword=" + fpassword + ", fcpassword="
-				+ fcpassword + "]";
+				+ fcpassword + ", seeds=" + seeds + ", crops=" + crops + ", herbs=" + herbs + ", fertilizer="
+				+ fertilizer + "]";
 	}
+	
+	
 	
 	
 	
