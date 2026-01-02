@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.ToString;
+
 @Entity
 @Table(name="fertilizer")
 public class Fertilizer {
@@ -31,6 +33,7 @@ public class Fertilizer {
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name ="fid" ,nullable=false)
+	@ToString.Exclude
 	private Farmer farmer;
 
 	public int getFertilizerId() {
@@ -84,7 +87,7 @@ public class Fertilizer {
 	@Override
 	public String toString() {
 		return "Fertilizer [fertilizerId=" + fertilizerId + ", fertilizerName=" + fertilizerName + ", category="
-				+ category + ", quantity=" + quantity + ", price=" + price + ", farmer=" + farmer + "]";
+				+ category + ", quantity=" + quantity + ", price=" + price +  "]";
 	}
 	
 	

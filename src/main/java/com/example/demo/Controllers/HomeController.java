@@ -4,14 +4,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Model.Admin;
+import com.example.demo.Model.Farmer;
 import com.example.demo.Service.AdminService;
+import com.example.demo.Service.FarmerService;
 
 @Controller
 
@@ -19,6 +23,10 @@ public class HomeController {
 
 	@Autowired
 	AdminService as;
+	
+	@Autowired
+	FarmerService fs;
+	
 	@RequestMapping("/")
 	public String home() {
 		return "index";
@@ -66,5 +74,21 @@ public class HomeController {
 		s1.invalidate();
 		return "redirect:/adminLogin";
 	}
+	
+	@GetMapping("/FindByVillage")
+	public String findbyVillage(@RequestParam ("x") String fr){
+		
+		System.out.println(fr);
+		return null;
+	}
+	
+	@GetMapping("/FarmerDetails/{id}")
+	public String farmerDetails(@PathVariable int id, Model m ) {
+		Farmer farmer =  fs.getFarmerDetails(id);
+		m.addAttribute("fd",farmer);
+		
+		return "FarmerDetails";
+	}
+	
 	
 }

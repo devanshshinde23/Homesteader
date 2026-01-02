@@ -13,6 +13,7 @@
 
     <style>
 
+<!--
         body {
             background-color: #eef5f0;
             font-family: "Segoe UI", sans-serif;
@@ -63,13 +64,26 @@
         .badge-status {
             font-size: 13px;
             padding: 5px 10px;
-        }
+        } 
     </style>
 
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<!--  
+	<nav class="navbar navbar-dark bg-success fixed-top">
+
+
+		<div class="container-fluid">
+			<span class="navbar-brand"><i class="fa-solid fa-leaf"></i>
+				Homesteader Admin Dashboard</span> <a href="FLogout"
+				class="btn btn-light btn-sm">Logout</a>
+		</div>
+
+	</nav>
+	-->
 <!-- Sidebar -->
 <div class="sidebar">
     <h3 class="text-center mb-4">
