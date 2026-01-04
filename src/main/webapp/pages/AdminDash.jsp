@@ -69,7 +69,7 @@ body {
 }
 
 .table thead {
-	background-color: #198754;
+	background-color: #2f5f44;
 	color: white;
 }
 
@@ -103,7 +103,7 @@ Table css --> /* Dark overlay */ .overlay {
 }
 
 .table th {
-	background-color: #007bff;
+	background-color: #2f5f44;
 	color: white;
 	text-align: center;
 }
@@ -231,7 +231,7 @@ Table css --> /* Dark overlay */ .overlay {
 
 
 		<c:if test="${showFarmers}">
-			<div class="overlay"></div>
+			<div class="overlay">
 
 			<div class="container mt-5">
 				<div class="container-box">
@@ -280,10 +280,11 @@ Table css --> /* Dark overlay */ .overlay {
 
 				</div>
 			</div>
+			</div>
 		</c:if>
 
 		<c:if test="${ShowAgency }">
-			<div class="overlay"></div>
+			<div class="overlay">
 
 			<div class="container mt-5">
 				<div class="container-box">
@@ -334,10 +335,11 @@ Table css --> /* Dark overlay */ .overlay {
 						</tbody>
 
 					</table>
-				</div>
+				</div></div>
+				
 			</div>
 		</c:if>
-
+	
 	</div>
 
 </body>
