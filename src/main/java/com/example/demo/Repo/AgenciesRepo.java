@@ -11,4 +11,6 @@ public interface AgenciesRepo extends JpaRepository<Agencies,Integer>{
 	Agencies findByAname(String u);
 	
 	
+	
+	
 }

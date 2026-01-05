@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,6 +95,55 @@
             font-size: 14px;
             color: #2d7a32;
         }
+        
+        /*cards hover effect */
+        .card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.scheme-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.scheme-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  background: #f0fff4; /* light green highlight */
+}
+
+/* Auto hover one by one (pulse effect) */
+.scheme-card {
+  animation: pulse 6s infinite;
+}
+
+.scheme-card:nth-child(1) { animation-delay: 0s; }
+.scheme-card:nth-child(2) { animation-delay: 2s; }
+.scheme-card:nth-child(3) { animation-delay: 4s; }
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 rgba(0,0,0,0); }
+  20% { box-shadow: 0 0 15px rgba(47,95,68,0.6); }
+  40% { box-shadow: 0 0 0 rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 rgba(0,0,0,0); }
+}
+        
+  .service-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 12px;
+  background: #f9fff9;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: inherit;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  background: #e6ffe6;
+}
+        
 
     </style>
 
@@ -111,9 +162,14 @@
         <a href="#"><i class="fa-solid fa-cloud-sun me-2"></i>Weather</a>
         <a href="#"><i class="fa-solid fa-landmark me-2"></i>Govt Schemes</a>
         <a href="#"><i class="fa-solid fa-headset me-2"></i>Support</a>
+        
+        <a href="javascript:void(0)" onclick="toggleChatbot()">
+  		<i class="fa-solid fa-robot me-2"></i> AI Chatbot</a>
+        
         <a href="Logout" class="mt-4"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
     </div>
 
+		
     <!-- Header -->
     <div class="header">
         <h5 class="m-0">Welcome, ${kk }</h5>
@@ -159,26 +215,67 @@
             </div>
         </div>
 
-        <!-- Weather -->
+        
         <div class="mt-5">
             <h4 class="section-title">Today's Weather</h4>
             <div class="card p-4">
-                <h5>🌤️ Sunny, 29°C</h5>
-                <p>Good day for irrigation and outdoor work.</p>
+                <h6>Today's Weather</h6> 
+	        <h3 id="weather-info">Loading...</h3>
             </div>
-        </div>
+        </div> <!-- 
+        
+        <div class="card shadow-sm p-3"> 
+	        <h6>Today's Weather</h6> 
+	        <h3 id="weather-info">Loading...</h3> 
+        </div>-->
 
         <!-- Govt Schemes -->
-        <div class="mt-5">
-            <h4 class="section-title">Government Schemes</h4>
-            <div class="card p-4">
-                <ul>
-                    <li>PM-KISAN Samman Nidhi Yojana</li>
-                    <li>Crop Insurance (PMFBY)</li>
-                    <li>Soil Health Card Scheme</li>
-                </ul>
-            </div>
+       <div class="container mt-5">
+  <h4 class="section-title">Government Schemes</h4>
+  <div class="row g-4">
+
+    <!-- PM-KISAN -->
+    <div class="col-md-4">
+      <a href="https://pmkisan.gov.in/" target="_blank" class="card service-card text-center">
+        <div class="card-body">
+          <i class="fa-solid fa-hand-holding-dollar fa-2x mb-3 text-success"></i>
+          <h5>PM-KISAN Samman Nidhi</h5>
+          <p>Direct income support for farmers.</p>
+          <button class="btn btn-outline-success mt-2">Visit PM-KISAN</button>
         </div>
+      </a>
+    </div>
+
+    <!-- PMFBY -->
+    <div class="col-md-4">
+      <a href="https://pmfby.gov.in/" target="_blank" class="card service-card text-center">
+        <div class="card-body">
+          <i class="fa-solid fa-shield-halved fa-2x mb-3 text-primary"></i>
+          <h5>Crop Insurance (PMFBY)</h5>
+          <p>Insurance against crop losses.</p>
+          <button class="btn btn-outline-primary mt-2">Visit PMFBY</button>
+        </div>
+      </a>
+    </div>
+
+    <!-- Soil Health Card -->
+    <div class="col-md-4">
+      <a href="https://soilhealth.dac.gov.in/" target="_blank" class="card service-card text-center">
+        <div class="card-body">
+          <i class="fa-solid fa-seedling fa-2x mb-3 text-warning"></i>
+          <h5>Soil Health Card Scheme</h5>
+          <p>Improve soil fertility & productivity.</p>
+          <button class="btn btn-outline-warning mt-2">Visit Soil Health</button>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+
+
 
         <!-- Footer -->
         <div class="footer">
@@ -186,6 +283,61 @@
         </div>
 
     </div>
-
+    
+    
+<!-- Chatbot Widget -->
+		<div id="chatbot-container" style="
+			display : none;
+		    position: fixed;
+		    bottom: 20px;
+		    right: 20px;
+		    width: 300px;
+		    background: #fff;
+		    border: 1px solid #ccc;
+		    border-radius: 10px;
+		    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+		    font-family: 'Segoe UI', sans-serif;		">
+		    <div id="chatbot-header" style="background:#2f5f44; color:#fff; padding:10px; border-radius:10px 10px 0 0;">
+		        Farmer Assistant 🤖
+		    </div>
+		    <div id="chatbot-messages" style="height:250px; overflow-y:auto; padding:10px; font-size:14px;"></div>
+		    <div style="display:flex; border-top:1px solid #ccc;">
+		        <input id="chatbot-input" type="text" placeholder="Ask me..." 
+		               style="flex:1; border:none; padding:10px; font-size:14px;">
+		        <button onclick="sendMessage()" style="background:#2f5f44; color:#fff; border:none; padding:10px;">Send</button>
+		    </div>
+		</div>
 </body>
+<script>
+function toggleChatbot() {
+    const chat = document.getElementById("chatbot-container");
+    chat.style.display = (chat.style.display === "none" || chat.style.display === "") ? "block" : "none";
+}
+
+function sendMessage() {
+    const input = document.getElementById("chatbot-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const chatBox = document.getElementById("chatbot-messages");
+    chatBox.innerHTML += "<div style='color:green; margin:5px 0;'><b>You:</b> " + message + "</div>";
+
+    // Call backend endpoint
+    fetch("/chat?message=" + encodeURIComponent(message))
+        .then(res => res.text())
+        .then(reply => {
+            chatBox.innerHTML += "<div style='color:#2f5f44; margin:5px 0;'><b>Bot:</b> " + reply + "</div>";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+    input.value = "";
+}
+
+fetch("/weather?city=satara") 
+	.then(res => res.json())
+	.then(data => { 
+	document.getElementById("weather-info").innerHTML =
+		data.weather[0].description + ", " + data.main.temp + "°C"; });
+</script>
+
 </html>

@@ -90,19 +90,16 @@ public class AgroAgenciesController {
 	@GetMapping("/ViewAgroAgencies")
 	public String ViewAgencyData(HttpSession Session ,Model m) {
 		
-		Boolean ShowAgency =(Boolean) Session.getAttribute("ShowAgency");
+		Boolean showAgency =(Boolean) Session.getAttribute("showAgency");
 		
-		if(ShowAgency == null || ShowAgency == false) {
-			ShowAgency = true;
+		if(showAgency == null || showAgency == false) {
+			showAgency = true;
 			
-			m.addAttribute("temp", as.ADisplay());
-		}else {
-			ShowAgency =false;
-			
+			m.addAttribute("agency", as.ADisplay());
 		}
-		
-		Session.setAttribute("ShowAgency", ShowAgency);
-		m.addAttribute("ShowAgency",ShowAgency);
+		m.addAttribute("showAgency", true); 
+		m.addAttribute("showFarmers", false);
+		m.addAttribute("agencyCount", as.countAgencies());
 		return("AdminDash");
 	}
 	

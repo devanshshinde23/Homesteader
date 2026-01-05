@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.Model.Admin;
 import com.example.demo.Model.Farmer;
 import com.example.demo.Service.AdminService;
+import com.example.demo.Service.AgenciesService;
 import com.example.demo.Service.FarmerService;
 
 @Controller
@@ -26,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	FarmerService fs;
+	
+	@Autowired 
+	AgenciesService ags;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -61,12 +65,20 @@ public class HomeController {
 	}
 	
 	@GetMapping("/AdminDash")
-	public String AdminDash(HttpSession s1 )
+	public String AdminDash(HttpSession s1 , Model m)
 	{
-		if(s1.getAttribute("temp")!=null) {
-			return "AdminDash";
+		if(s1.getAttribute("temp")==null) {
+			
+			
+			return "redirect:/adminLogin";
 		}
-		return "redirect:/adminLogin";
+		
+//		long agencyCount = ags.countAgencies(); // returns count from DB 
+		m.addAttribute("agencyCount", ags.countAgencies()); 
+		
+		return "AdminDash";
+		
+		
 	}
 	
 	@GetMapping("/FLogout")
@@ -89,6 +101,7 @@ public class HomeController {
 		
 		return "FarmerDetails";
 	}
+	
 	
 	
 }
