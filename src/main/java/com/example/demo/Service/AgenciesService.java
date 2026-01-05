@@ -16,6 +16,8 @@ public interface AgenciesService {
 	public Agencies findByUsername(String x);
 
 	public List<Agencies> ADisplay();
+	
+	public Long countAgencies();
 
 	
 

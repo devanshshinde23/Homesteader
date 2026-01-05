@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Model.Farmer;
 import com.example.demo.Model.Crop;
+import com.example.demo.Service.AgenciesService;
 import com.example.demo.Service.FarmerService;
 
 @Controller
@@ -23,6 +25,9 @@ public class FarmerController {
 
 	@Autowired
 	FarmerService ff;
+	
+	@Autowired
+	AgenciesService ags ;
 	
 	@GetMapping("/FarmerLogin")
 	public String FarmerLogin(HttpSession s1){
@@ -89,18 +94,26 @@ public class FarmerController {
 	    // toggle logic
 	    if (showFarmers == null || showFarmers == false) {
 	        showFarmers = true;
-	        model.addAttribute("temp", ff.Display()); // load data only when showing
-	    } else {
-	        showFarmers = false;
-	    }
-
-	    session.setAttribute("showFarmers", showFarmers);
-	    model.addAttribute("showFarmers", showFarmers);
+	        model.addAttribute("farmers", ff.Display()); // load data only when showing
+	    } 
+	    model.addAttribute("showFarmers", true); 
+	    model.addAttribute("showAgency", false);
+	    model.addAttribute("agencyCount", ags.countAgencies());
 
 	    return "AdminDash";
 	}
 	
 	
+//	@GetMapping("/chat") 
+//	@ResponseBody 
+//	public String chat(@RequestParam String message) { // For now, return a simple response // Later, connect to AI service (Azure OpenAI, Copilot APIs, etc.) 
+//		if (message.toLowerCase().contains("fertilizer")) 
+//		{ 
+//			return "Use organic compost or NPK fertilizer depending on soil analysis."; 
+//		} 
+//		return "I'm here to help! Could you tell me more about your question?"; }
+//	}
+//	
 	
 	
 	

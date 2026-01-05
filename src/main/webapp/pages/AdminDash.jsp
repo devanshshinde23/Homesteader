@@ -159,13 +159,14 @@ Table css --> /* Dark overlay */ .overlay {
 
 		<hr>
 
-		<a href="#"><i class="fa-solid fa-wheat-awn me-2"></i> Add Crops Info</a> 
-		<a href="#"><i class="fa-solid fa-leaf me-2"></i> Add Herbs Info</a>
-			 <a href="#"><i class="fa-solid fa-carrot me-2"></i> Add Vegetables Info</a> 
-			<a href="#"><i class="fa-solid fa-seedling me-2"></i>Add Seeds Info</a> 
-			<a href="#"><i	class="fa-solid fa-apple-whole me-2"></i> Add Fruits Info</a>
-			 <a href="#"><i		class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a> 
-			 <a href="#"><i	class="fa-solid fa-indian-rupee-sign me-2"></i> Update Market Prices</a>
+		<a href="#"><i class="fa-solid fa-wheat-awn me-2"></i> Add Crops
+			Info</a> <a href="#"><i class="fa-solid fa-leaf me-2"></i> Add Herbs
+			Info</a> <a href="#"><i class="fa-solid fa-carrot me-2"></i> Add
+			Vegetables Info</a> <a href="#"><i class="fa-solid fa-seedling me-2"></i>Add
+			Seeds Info</a> <a href="#"><i class="fa-solid fa-apple-whole me-2"></i>
+			Add Fruits Info</a> <a href="#"><i class="fa-solid fa-flask me-2"></i>
+			Add Fertilizers Info</a> <a href="#"><i
+			class="fa-solid fa-indian-rupee-sign me-2"></i> Update Market Prices</a>
 		<a href="#"><i class="fa-solid fa-cloud-sun-rain me-2"></i> Add
 			Climate Changes</a> <a href="#"><i
 			class="fa-solid fa-mountain-sun me-2"></i> Add Soil Analysis</a> <a
@@ -186,7 +187,7 @@ Table css --> /* Dark overlay */ .overlay {
 	<!-- MAIN CONTENT -->
 	<div class="content mt-4">
 
-		<h2 class="mb-4">Dashboard Overview</h2>
+		<h2 class="mb-4">DashBoard Overview</h2>
 
 		<!-- TOP CARDS -->
 		<div class="row">
@@ -195,7 +196,8 @@ Table css --> /* Dark overlay */ .overlay {
 				<div class="card shadow-sm p-3">
 					<h6>Total Agro Agencies</h6>
 					<h3>
-						<i class="fa-solid fa-building me-2"></i> 32
+						<i class="fa-solid fa-building me-2"></i> ${agencyCount}
+				
 					</h3>
 				</div>
 			</div>
@@ -229,118 +231,120 @@ Table css --> /* Dark overlay */ .overlay {
 
 		</div>
 
-
+   		<div class="overlay">
 		<c:if test="${showFarmers}">
-			<div class="overlay">
+			
 
-			<div class="container mt-5">
-				<div class="container-box">
+				<div class="container mt-5">
+					<div class="container-box">
 
-					<h2 class="text-center text-black  mb-4">Farmer Registration
-						Records</h2>
+						<h2 class="text-center text-black  mb-4">Farmer Registration
+							Records</h2>
 
-					<div class="search-box">
-						<input type="text" name="sdob" class="form-control" id="dob"
-							placeholder="Search by Region">
-						<button type="submit" class="btn btn-light">Find</button>
-					</div>
+						<div class="search-box">
+							<input type="text" name="sdob" class="form-control" id="dob"
+								placeholder="Search by Region">
+							<button type="submit" class="btn btn-light">Find</button>
+						</div>
 
-					<table class="table table-bordered table-hover text-center">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Farmer Name</th>
-								<th>Email</th>
-								<th>Mobile</th>
-								<th>Village</th>
-								<th>Username</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<c:forEach items="${temp}" var="e">
+						<table class="table table-bordered table-hover text-center">
+							<thead>
 								<tr>
-									<td><c:out value="${e.fid}" /></td>
-									<td><c:out value="${e.fname}" /></td>
-									<td><c:out value="${e.femail}" /></td>
-									<td><c:out value="${e.fMobileNo}" /></td>
-									<td><c:out value="${e.fregion}" /></td>
-									<td><c:out value="${e.fusername}" /></td>
-
-									<td><a href="FarmerDetails/${e.fid}"
-										class="btn btn-outline-primary btn-sm">View</a> <a
-										href="Deletedata/${e.fid}"
-										class="btn btn-outline-danger btn-sm">Delete</a></td>
+									<th>ID</th>
+									<th>Farmer Name</th>
+									<th>Email</th>
+									<th>Mobile</th>
+									<th>Village</th>
+									<th>Username</th>
+									<th>Action</th>
 								</tr>
-							</c:forEach>
-						</tbody>
+							</thead>
 
-					</table>
+							<tbody>
+								<c:forEach items="${farmers}" var="e">
+									<tr>
+										<td><c:out value="${e.fid}" /></td>
+										<td><c:out value="${e.fname}" /></td>
+										<td><c:out value="${e.femail}" /></td>
+										<td><c:out value="${e.fMobileNo}" /></td>
+										<td><c:out value="${e.fregion}" /></td>
+										<td><c:out value="${e.fusername}" /></td>
 
+										<td><a href="FarmerDetails/${e.fid}"
+											class="btn btn-outline-primary btn-sm">View</a> <a
+											href="Deletedata/${e.fid}"
+											class="btn btn-outline-danger btn-sm">Delete</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+
+						</table>
+
+					</div>
 				</div>
-			</div>
-			</div>
+			
 		</c:if>
 
-		<c:if test="${ShowAgency }">
-			<div class="overlay">
+		<c:if test="${showAgency}">
+			
 
-			<div class="container mt-5">
-				<div class="container-box">
+				<div class="container mt-5">
+					<div class="container-box">
 
-					<h2 class="text-center text-black mb-4">Agro Agencies Records</h2>
+						<h2 class="text-center text-black mb-4">Agro Agencies Records</h2>
 
-					<div class="search-box">
-						<input type="text" name="sdob" class="form-control" id="dob"
-							placeholder="Search by Region">
-						<button type="submit" class="btn btn-light">Find</button>
-					</div>
+						<div class="search-box">
+							<input type="text" name="sdob" class="form-control" id="dob"
+								placeholder="Search by Region">
+							<button type="submit" class="btn btn-light">Find</button>
+						</div>
 
-					<table class="table table-bordered table-hover text-center">
+						<table class="table table-bordered table-hover text-center">
 
-						<thead>
-							<tr>
-								<td>Id</td>
-								<td>Agency Name</td>
-								<td>Owner Name</td>
-								<td>Register No</td>
-								<td>Agency Type</td>
-								<td>MOB_NO</td>
-								<td>Address</td>
-								<td>UserName</td>
-								<td>Action </td>
-							</tr>
-
-						</thead>
-
-						<tbody>
-							<c:forEach items="${temp}" var="e">
+							
+							<thead>
 								<tr>
-									<td><c:out value="${e.aid}" /></td>
-									<td><c:out value="${e.aname}" /></td>
-									<td><c:out value="${e.aownerName}" /></td>
-									<td><c:out value="${e.aregisterNo}" /></td>
-									<td><c:out value="${e.atype}" /></td>
-									<td><c:out value="${e.amobno}" /></td>
-									<td><c:out value="${e.aaddress}" /></td>
-									<td><c:out value="${e.ausername }"></c:out></td>
-
-									<td><a href="EditData/${e.aid}"
-										class="btn btn-outline-primary btn-sm">Edit</a> <a
-										href="Deletedata/${e.aid}"
-										class="btn btn-outline-danger btn-sm">Delete</a></td>
+									<th>Id</th>
+									<th>Agency Name</th>
+									<th>Owner Name</th>
+									<th>Register No</th>
+									<th>Agency Type</th>
+									<th>MOB_NO</th>
+									<th>Address</th>
+									<th>UserName</th>
+									<th>Action</th>
 								</tr>
-							</c:forEach>
-						</tbody>
 
-					</table>
-				</div></div>
-				
-			</div>
+							</thead>
+
+							<tbody>
+								<c:forEach items="${agency}" var="e">
+									<tr>
+										<td><c:out value="${e.aid}" /></td>
+										<td><c:out value="${e.aname}" /></td>
+										<td><c:out value="${e.aownerName}" /></td>
+										<td><c:out value="${e.aregisterNo}" /></td>
+										<td><c:out value="${e.atype}" /></td>
+										<td><c:out value="${e.amobno}" /></td>
+										<td><c:out value="${e.aaddress}" /></td>
+										<td><c:out value="${e.ausername }"></c:out></td>
+
+										<td><a href="EditData/${e.aid}"
+											class="btn btn-outline-primary btn-sm">Edit</a> <a
+											href="Deletedata/${e.aid}"
+											class="btn btn-outline-danger btn-sm">Delete</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+
+			
 		</c:if>
-	
-	</div>
+		
+</div>
 
 </body>
 </html>
