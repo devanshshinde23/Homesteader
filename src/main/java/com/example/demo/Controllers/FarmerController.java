@@ -51,9 +51,10 @@ public class FarmerController {
 	
 	@GetMapping("/FarmerDash")
 	public String Farmerdash(HttpSession s1, Model m) {
-		if(s1.getAttribute("temp")!=null) {
-//			Farmer FD=(Farmer)s1.getAttribute("temp");
-//			m.addAttribute("kk", FD);
+		Farmer FD=(Farmer)s1.getAttribute("temp");
+		if(FD!=null) {
+			
+			m.addAttribute("kk", FD.getFname());
 			return "FarmerDash";
 		}
 		return "redirect:/FarmerLogin";
@@ -66,7 +67,7 @@ public class FarmerController {
 		
 		if(fk!=null) {
 			s1.setAttribute("fid", fk.getFid());
-			s1.setAttribute("temp", fk.getFname());
+			s1.setAttribute("temp", fk);
 			return "redirect:/FarmerDash";
 		}
 		return "redirect:/FarmerLogin";
@@ -78,13 +79,7 @@ public class FarmerController {
 		return "redirect:/FarmerLogin";
 	}
 	
-//	@GetMapping("/Viewfarmer")
-//	public String viewFarmer(Model m) {
-//		List<Farmer> ll=ff.Display();
-//		m.addAttribute("temp",ll);
-//		m.addAttribute("showFarmers", true);
-//		return "AdminDash";
-//	}
+
 	
 	@GetMapping("/Viewfarmer")
 	public String viewFarmer(HttpSession session, Model model) {
