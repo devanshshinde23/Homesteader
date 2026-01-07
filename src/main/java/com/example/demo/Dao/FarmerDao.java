@@ -56,6 +56,17 @@ public class FarmerDao implements FarmerService{
 		
 		return fr.findById(fid).orElseThrow(()-> new RuntimeException("Farmer Not found "));
 	}
+	@Override
+	public List<Farmer> findByFname(String fname) {
+		
+		return fr.findByFname(fname);
+	}
+	@Override
+	public List<Farmer> fetchData(String name) {
+		
+		return fr.findByFregion(name);
+	}
+	
 	
 
 }

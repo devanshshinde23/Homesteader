@@ -22,6 +22,11 @@ public interface FarmerService {
 	public Farmer login(String username, String password);
 	
 	public Farmer getFarmerDetails(int fid );
+
+	
+	List<Farmer> findByFname(String fname);
+
+	public List<Farmer> fetchData(String name);
 	
 	
 

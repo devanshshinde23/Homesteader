@@ -99,6 +99,8 @@ public class FarmerController {
 	}
 	
 	
+	
+	
 //	@GetMapping("/chat") 
 //	@ResponseBody 
 //	public String chat(@RequestParam String message) { // For now, return a simple response // Later, connect to AI service (Azure OpenAI, Copilot APIs, etc.) 
