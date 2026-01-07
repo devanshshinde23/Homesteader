@@ -249,7 +249,7 @@ Table css --> /* Dark overlay */ .overlay {
 					    </form>
 					
 					    <!-- Search by Farmer Name -->
-					    <form action="SearchByName" method="get" class="d-flex">
+					    <form action="SearchByFarmerName" method="get" class="d-flex">
 					        <input type="text" name="fname" class="form-control me-2"
 					               placeholder="Search By Farmer Name">
 					        <button type="submit" class="btn btn-light">Search</button>

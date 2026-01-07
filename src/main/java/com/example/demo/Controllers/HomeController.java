@@ -100,12 +100,12 @@ public class HomeController {
 	}
 	
 	@GetMapping("/SearchByFarmerName")
-	public String findbyname(@RequestParam ("fname") String fname , Model m) {
-		
-		List<Farmer> farmerName = fs.findByFname(fname);
-		m.addAttribute("farmers" , farmerName);
+	public String findbyname(@RequestParam ("fname") String frname ,Model m) {
+		List<Farmer> farmerName = fs.findByname(frname);
+		m.addAttribute("farmers", farmerName);
 		m.addAttribute("showFarmers", true);
-		return"AdminDash";
+		
+		return "AdminDash";
 	}
 	
 	@GetMapping("/FarmerDetails/{id}")
