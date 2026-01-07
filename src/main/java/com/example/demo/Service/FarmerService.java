@@ -24,7 +24,7 @@ public interface FarmerService {
 	public Farmer getFarmerDetails(int fid );
 
 	
-	List<Farmer> findByFname(String fname);
+	public List<Farmer> findByname(String fname);
 
 	public List<Farmer> fetchData(String name);
 	

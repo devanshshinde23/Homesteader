@@ -10,7 +10,7 @@ public interface FarmerRepo extends JpaRepository<Farmer,Integer>{
 
 	Farmer findByFusernameAndFpassword(String u,String p);
 
-	List<Farmer> findByFname(String fname);
+	List<Farmer> findByFnameIgnoreCaseContaining(String fname);
 	
 	List<Farmer> findByFregion(String name);
 	
