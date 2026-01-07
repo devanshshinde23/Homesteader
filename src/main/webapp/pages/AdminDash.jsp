@@ -240,13 +240,21 @@ Table css --> /* Dark overlay */ .overlay {
 
 						<h2 class="text-center text-black  mb-4">Farmer Registration
 							Records</h2>
-
-						<div class="search-box">
-							<input type="text" name="sdob" class="form-control" id="dob"
-								placeholder="Search by Region">
-							<button type="submit" class="btn btn-light">Find</button>
-						</div>
-
+						<div class="d-flex mb-3">
+					    <!-- Search by Village -->
+					    <form action="SearchByVillage" method="get" class="d-flex me-3">
+					        <input type="text" name="fregion" class="form-control me-2"
+					               placeholder="Search By Village">
+					        <button type="submit" class="btn btn-light">Search</button>
+					    </form>
+					
+					    <!-- Search by Farmer Name -->
+					    <form action="SearchByName" method="get" class="d-flex">
+					        <input type="text" name="fname" class="form-control me-2"
+					               placeholder="Search By Farmer Name">
+					        <button type="submit" class="btn btn-light">Search</button>
+					    </form>
+					    </div>
 						<table class="table table-bordered table-hover text-center">
 							<thead>
 								<tr>

@@ -1,5 +1,7 @@
 package com.example.demo.Controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,11 +89,23 @@ public class HomeController {
 		return "redirect:/adminLogin";
 	}
 	
-	@GetMapping("/FindByVillage")
-	public String findbyVillage(@RequestParam ("x") String fr){
+	@GetMapping("/SearchByVillage")
+	public String findbyVillage(@RequestParam ("fregion") String name , Model m){
 		
-		System.out.println(fr);
-		return null;
+//		System.out.println(name);
+		List<Farmer> farmer = fs.fetchData(name);
+		m.addAttribute("farmers",farmer);
+		m.addAttribute("showFarmers",true);
+		return "AdminDash";
+	}
+	
+	@GetMapping("/SearchByFarmerName")
+	public String findbyname(@RequestParam ("fname") String fname , Model m) {
+		
+		List<Farmer> farmerName = fs.findByFname(fname);
+		m.addAttribute("farmers" , farmerName);
+		m.addAttribute("showFarmers", true);
+		return"AdminDash";
 	}
 	
 	@GetMapping("/FarmerDetails/{id}")
