@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 
 <!DOCTYPE html>
 <html>
@@ -105,7 +108,25 @@ input:focus, textarea:focus, select:focus {
             <form action="${pageContext.request.contextPath}/saveCrop"
                   method="post">
 
-                <!-- Crop Name -->
+							<!-- Farmer ID handling -->
+							<c:if test="${not empty farmerId}">
+								<!-- Farmer login: hidden field -->
+								<input type="hidden" name="farmerId" value="${farmerId}" />
+							</c:if>
+							<c:if test="${empty farmerId}">
+								<!-- Admin login: dropdown of farmers -->
+								<div class="mb-3">
+									<label class="form-label">Select Farmer</label> <select
+										name="farmerId" class="form-control" required>
+										<option value="">--Select Farmer--</option>
+										<c:forEach var="farmer" items="${farmers}">
+											<option value="${farmer.fid}">${farmer.fname}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</c:if>
+
+					<!-- Crop Name -->
                 <div class="mb-3">
                     <label class="form-label">Crop Name</label>
                     <input type="text"
