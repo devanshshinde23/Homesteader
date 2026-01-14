@@ -26,7 +26,7 @@ public class AgenciesDao implements AgenciesService{
 
 	@Override
 	public Agencies checkAgency(String u, String p) {
-		Agencies ca= ar.findByAusernameAndApassword(u, p);
+		Agencies ca= ar.findByUsernameAndPassword(u, p);
 		return ca;
 	}
 
@@ -38,7 +38,7 @@ public class AgenciesDao implements AgenciesService{
 
 	@Override
 	public Agencies fetchSingleRecord(String name) {
-		Agencies ad=ar.findByAname(name);
+		Agencies ad=ar.findByName(name);
 		
 		return ad;
 		
@@ -46,7 +46,7 @@ public class AgenciesDao implements AgenciesService{
 
 	@Override
 	public Agencies findByUsername(String x) {
-		Agencies ag = ar.findByAname(x);
+		Agencies ag = ar.findByName(x);
 		
 		return ag;
 	}

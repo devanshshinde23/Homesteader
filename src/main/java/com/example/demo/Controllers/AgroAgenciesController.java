@@ -49,7 +49,7 @@ public class AgroAgenciesController {
 	{
 		Agencies ar=as.checkAgency(u,p);
 		if(ar!=null) {
-			s1.setAttribute("temp", ar.getAusername());
+			s1.setAttribute("temp", ar.getUsername());
 		return "redirect:/AgencyDash";
 		}
 		return "redirect:/AgenciesLogin";
