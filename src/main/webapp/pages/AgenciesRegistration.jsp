@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,25 +44,25 @@
                     <!-- Agency Name -->
                     <div class="mb-3">
                         <label class="form-label">Agency Name</label>
-                        <input type="text" name="aname" class="form-control" required>
+                        <input type="text" name="name" class="form-control" required>
                     </div>
 
                     <!-- Owner Name -->
                     <div class="mb-3">
                         <label class="form-label">Owner Name</label>
-                        <input type="text" name="aownerName" class="form-control" required>
+                        <input type="text" name="ownerName" class="form-control" required>
                     </div>
 
                     <!-- Register Number -->
                     <div class="mb-3">
                         <label class="form-label">Registration Number</label>
-                        <input type="number" name="aregisterNo" class="form-control" required>
+                        <input type="text" name="registerNo" class="form-control" required>
                     </div>
 
                     <!-- Agency Type -->
                     <div class="mb-3">
                         <label class="form-label">Agency Type</label>
-                        <select name="atype" class="form-select" required>
+                        <select name="type" class="form-select" required>
                             <option value="">Select Type</option>
                             <option>Fertilizer Supplier</option>
                             <option>Pesticide Supplier</option>
@@ -73,25 +75,31 @@
                     <!-- Mobile No -->
                     <div class="mb-3">
                         <label class="form-label">Mobile Number</label>
-                        <input type="text" name="amobno" maxlength="10" class="form-control" required>
+                        <input type="text" name="mobileNo" maxlength="15" class="form-control" required>
                     </div>
 
                     <!-- Address -->
                     <div class="mb-3">
                         <label class="form-label">Address</label>
-                        <textarea name="aaddress" class="form-control" rows="2" required></textarea>
+                        <textarea name="address" class="form-control" rows="2" required></textarea>
+                    </div>
+
+                    <!-- Village -->
+                    <div class="mb-3">
+                        <label class="form-label">Village</label>
+                        <input type="text" name="village" class="form-control">
                     </div>
 
                     <!-- Username -->
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" name="ausername" class="form-control" required>
+                        <input type="text" name="username" class="form-control" required>
                     </div>
 
                     <!-- Password -->
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="apassword" class="form-control" required>
+                        <input type="password" name="password" class="form-control" required>
                     </div>
 
                     <!-- Submit Button -->
@@ -109,3 +117,4 @@
 
 </body>
 </html>
+

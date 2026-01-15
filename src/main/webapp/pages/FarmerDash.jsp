@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,6 +150,7 @@
     </style>
 
 </head>
+
 <body>
 
     <!-- Sidebar -->
@@ -157,19 +160,15 @@
         <a href="AddCrop"><i class="fa-solid fa-wheat-awn me-2"></i>Add Crop</a>
         <a href="AddHerbs"><i class="fa-solid fa-leaf me-2"></i>Add Herbs </a>
         <a href="AddSeeds"><i class="fa-solid fa-seedling me-2"></i>Add Seeds Info</a>
-         <a href="AddFertilizer"><i	class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a>
-         
+        <a href="AddFertilizer"><i class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a>
         <a href="#"><i class="fa-solid fa-cloud-sun me-2"></i>Weather</a>
         <a href="#"><i class="fa-solid fa-landmark me-2"></i>Govt Schemes</a>
         <a href="#"><i class="fa-solid fa-headset me-2"></i>Support</a>
-        
         <a href="javascript:void(0)" onclick="toggleChatbot()">
-  		<i class="fa-solid fa-robot me-2"></i> AI Chatbot</a>
-        
+            <i class="fa-solid fa-robot me-2"></i> AI Chatbot</a>
         <a href="Logout" class="mt-4"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
     </div>
 
-		
     <!-- Header -->
     <div class="header">
         <h5 class="m-0">Welcome, ${kk }</h5>
@@ -189,7 +188,6 @@
                     <p>Manage sowing & harvesting.</p>
                 </div>
             </div>
-
             <div class="col-md-3">
                 <div class="card-box">
                     <i class="fa-solid fa-shop"></i>
@@ -197,7 +195,6 @@
                     <p>Sell crops at best prices.</p>
                 </div>
             </div>
-
             <div class="col-md-3">
                 <div class="card-box">
                     <i class="fa-solid fa-cloud-sun"></i>
@@ -205,7 +202,6 @@
                     <p>Plan farming using weather.</p>
                 </div>
             </div>
-
             <div class="col-md-3">
                 <div class="card-box">
                     <i class="fa-solid fa-landmark"></i>
@@ -215,67 +211,108 @@
             </div>
         </div>
 
-        
+        <!-- Request Service Section -->
+        <div class="mt-5">
+            <h4 class="section-title">Request Services from Agencies</h4>
+
+            <!-- Example agency card (loop through agencies in JSP) -->
+            <c:forEach items="${agencies}" var="agency">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">${agency.name}</h5>
+                        <p class="card-text">${agency.type} — ${agency.village}</p>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#requestModal"
+                                data-agency-id="${agency.aid}">
+                            Request Service
+                        </button>
+                    </div>
+                </div>
+            </c:forEach>
+
+            <!-- Request Modal -->
+            <div class="modal fade" id="requestModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="/farmer/requests" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Submit Service Request</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="agencyId" id="agencyId">
+                                <select name="serviceType" class="form-select mb-2">
+                                    <option>Seeds</option>
+                                    <option>Fertilizer</option>
+                                    <option>Equipment</option>
+                                    <option>Crop Buyer</option>
+                                </select>
+                                <textarea name="details" class="form-control mb-2" placeholder="Enter details"></textarea>
+                                <input type="number" name="quantity" class="form-control mb-2" placeholder="Quantity">
+                                <input type="text" name="unit" class="form-control mb-2" placeholder="Unit (kg, bags)">
+                                <input type="date" name="preferredDate" class="form-control mb-2">
+                                <select name="deliveryMode" class="form-select mb-2">
+                                    <option>Pickup</option>
+                                    <option>Delivery</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Weather -->
         <div class="mt-5">
             <h4 class="section-title">Today's Weather</h4>
             <div class="card p-4">
-                <h6>Today's Weather</h6> 
-	        <h3 id="weather-info">Loading...</h3>
+                <h6>Today's Weather</h6>
+                <h3 id="weather-info">Loading...</h3>
             </div>
-        </div> <!-- 
-        
-        <div class="card shadow-sm p-3"> 
-	        <h6>Today's Weather</h6> 
-	        <h3 id="weather-info">Loading...</h3> 
-        </div>-->
+        </div>
 
         <!-- Govt Schemes -->
-       <div class="container mt-5">
-  <h4 class="section-title">Government Schemes</h4>
-  <div class="row g-4">
-
-    <!-- PM-KISAN -->
-    <div class="col-md-4">
-      <a href="https://pmkisan.gov.in/" target="_blank" class="card service-card text-center">
-        <div class="card-body">
-          <i class="fa-solid fa-hand-holding-dollar fa-2x mb-3 text-success"></i>
-          <h5>PM-KISAN Samman Nidhi</h5>
-          <p>Direct income support for farmers.</p>
-          <button class="btn btn-outline-success mt-2">Visit PM-KISAN</button>
+        <div class="container mt-5">
+            <h4 class="section-title">Government Schemes</h4>
+            <div class="row g-4">
+                <!-- PM-KISAN -->
+                <div class="col-md-4">
+                    <a href="https://pmkisan.gov.in/" target="_blank" class="card service-card text-center">
+                        <div class="card-body">
+                            <i class="fa-solid fa-hand-holding-dollar fa-2x mb-3 text-success"></i>
+                            <h5>PM-KISAN Samman Nidhi</h5>
+                            <p>Direct income support for farmers.</p>
+                            <button class="btn btn-outline-success mt-2">Visit PM-KISAN</button>
+                        </div>
+                    </a>
+                </div>
+                <!-- PMFBY -->
+                <div class="col-md-4">
+                    <a href="https://pmfby.gov.in/" target="_blank" class="card service-card text-center">
+                        <div class="card-body">
+                            <i class="fa-solid fa-shield-halved fa-2x mb-3 text-primary"></i>
+                            <h5>Crop Insurance (PMFBY)</h5>
+                            <p>Insurance against crop losses.</p>
+                            <button class="btn btn-outline-primary mt-2">Visit PMFBY</button>
+                        </div>
+                    </a>
+                </div>
+                <!-- Soil Health Card -->
+                <div class="col-md-4">
+                    <a href="https://soilhealth.dac.gov.in/" target="_blank" class="card service-card text-center">
+                        <div class="card-body">
+                            <i class="fa-solid fa-seedling fa-2x mb-3 text-warning"></i>
+                            <h5>Soil Health Card Scheme</h5>
+                            <p>Improve soil fertility & productivity.</p>
+                            <button class="btn btn-outline-warning mt-2">Visit Soil Health</button>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-      </a>
-    </div>
-
-    <!-- PMFBY -->
-    <div class="col-md-4">
-      <a href="https://pmfby.gov.in/" target="_blank" class="card service-card text-center">
-        <div class="card-body">
-          <i class="fa-solid fa-shield-halved fa-2x mb-3 text-primary"></i>
-          <h5>Crop Insurance (PMFBY)</h5>
-          <p>Insurance against crop losses.</p>
-          <button class="btn btn-outline-primary mt-2">Visit PMFBY</button>
-        </div>
-      </a>
-    </div>
-
-    <!-- Soil Health Card -->
-    <div class="col-md-4">
-      <a href="https://soilhealth.dac.gov.in/" target="_blank" class="card service-card text-center">
-        <div class="card-body">
-          <i class="fa-solid fa-seedling fa-2x mb-3 text-warning"></i>
-          <h5>Soil Health Card Scheme</h5>
-          <p>Improve soil fertility & productivity.</p>
-          <button class="btn btn-outline-warning mt-2">Visit Soil Health</button>
-        </div>
-      </a>
-    </div>
-
-  </div>
-</div>
-
-
-
-
 
         <!-- Footer -->
         <div class="footer">
@@ -283,9 +320,8 @@
         </div>
 
     </div>
-    
-    
-<!-- Chatbot Widget -->
+
+    <!-- Chatbot Widget -->
 		<div id="chatbot-container" style="
 			display : none;
 		    position: fixed;
@@ -308,6 +344,7 @@
 		    </div>
 		</div>
 </body>
+    
 <script>
 function toggleChatbot() {
     const chat = document.getElementById("chatbot-container");
@@ -341,3 +378,5 @@ fetch("/weather?city=satara")
 </script>
 
 </html>
+
+

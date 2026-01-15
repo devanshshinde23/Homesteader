@@ -319,6 +319,7 @@ Table css --> /* Dark overlay */ .overlay {
 									<th>MOB_NO</th>
 									<th>Address</th>
 									<th>UserName</th>
+									<th>Status </th>
 									<th>Action</th>
 								</tr>
 
@@ -328,14 +329,15 @@ Table css --> /* Dark overlay */ .overlay {
 								<c:forEach items="${agency}" var="e">
 									<tr>
 										<td><c:out value="${e.aid}" /></td>
-										<td><c:out value="${e.aname}" /></td>
-										<td><c:out value="${e.aownerName}" /></td>
-										<td><c:out value="${e.aregisterNo}" /></td>
-										<td><c:out value="${e.atype}" /></td>
-										<td><c:out value="${e.amobno}" /></td>
-										<td><c:out value="${e.aaddress}" /></td>
-										<td><c:out value="${e.ausername }"></c:out></td>
-
+										<td><c:out value="${e.name}" /></td>
+										<td><c:out value="${e.ownerName}" /></td>
+										<td><c:out value="${e.registerNo}" /></td>
+										<td><c:out value="${e.type}" /></td>
+										<td><c:out value="${e.mobileNo}" /></td>
+										<td><c:out value="${e.address}" /></td>
+										<td><c:out value="${e.username }"></c:out></td>
+										<td><c:out value="${e.status }"></c:out></td>
+										
 										<td><a href="EditData/${e.aid}"
 											class="btn btn-outline-primary btn-sm">Edit</a> <a
 											href="Deletedata/${e.aid}"

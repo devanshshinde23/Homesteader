@@ -91,7 +91,7 @@
     </h3>
 
     <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
-    <a href="#"><i class="bi bi-person-lines-fill"></i> Farmers</a>
+    <a href="AgencyViewfarmer"><i class="bi bi-person-lines-fill"></i> Farmers</a>
     <a href="#"><i class="bi bi-mortarboard"></i> Students</a>
     <a href="#"><i class="bi bi-journal-check"></i> Training Requests</a>
     <a href="#"><i class="bi bi-gear"></i> Settings</a>
@@ -218,6 +218,67 @@
 
     </div>
 
+	<div class="overlay">
+		<c:if test="${showFarmers}">
+			
+
+				<div class="container mt-5">
+					<div class="container-box">
+
+						<h2 class="text-center text-black  mb-4">Farmer Registration
+							Records</h2>
+						<div class="d-flex mb-3">
+					    <!-- Search by Village -->
+					    <form action="SearchVillage" method="get" class="d-flex me-3">
+					        <input type="text" name="fregion" class="form-control me-2"
+					               placeholder="Search By Village">
+					        <button type="submit" class="btn btn-light">Search</button>
+					    </form>
+					
+					    <!-- Search by Farmer Name -->
+					    <form action="SearchFarmerName" method="get" class="d-flex">
+					        <input type="text" name="fname" class="form-control me-2"
+					               placeholder="Search By Farmer Name">
+					        <button type="submit" class="btn btn-light">Search</button>
+					    </form>
+					    </div>
+						<table class="table table-bordered table-hover text-center">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Farmer Name</th>
+									<th>Email</th>
+									<th>Mobile</th>
+									<th>Village</th>
+									<th>Username</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<c:forEach items="${farmers}" var="e">
+									<tr>
+										<td><c:out value="${e.fid}" /></td>
+										<td><c:out value="${e.fname}" /></td>
+										<td><c:out value="${e.femail}" /></td>
+										<td><c:out value="${e.fMobileNo}" /></td>
+										<td><c:out value="${e.fregion}" /></td>
+										<td><c:out value="${e.fusername}" /></td>
+
+										<td><a href="FarmerDetails/${e.fid}"
+											class="btn btn-outline-primary btn-sm">View</a> <a
+											href="Deletedata/${e.fid}"
+											class="btn btn-outline-danger btn-sm">Delete</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+
+						</table>
+
+					</div>
+				</div>
+			
+		</c:if>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

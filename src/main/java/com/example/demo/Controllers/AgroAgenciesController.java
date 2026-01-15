@@ -15,13 +15,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Model.Agencies;
+import com.example.demo.Model.Farmer;
 import com.example.demo.Service.AgenciesService;
+import com.example.demo.Service.FarmerService;
 
 @Controller
 public class AgroAgenciesController {
 
 	@Autowired 
 	AgenciesService as;
+	
+	@Autowired 
+	FarmerService ffs;
 	
 	
 	@GetMapping("/AgenciesRegistration")
@@ -102,5 +107,41 @@ public class AgroAgenciesController {
 		m.addAttribute("agencyCount", as.countAgencies());
 		return("AdminDash");
 	}
+	
+	@GetMapping("/AgencyViewfarmer")
+	public String viewFarmer(HttpSession session, Model model) {
+
+	    Boolean showFarmers = (Boolean) session.getAttribute("showFarmers");
+
+	    // toggle logic
+	    if (showFarmers == null || showFarmers == false) {
+	        showFarmers = true;
+	        model.addAttribute("farmers", ffs.Display()); // load data only when showing
+	    } 
+	    model.addAttribute("showFarmers", true); 
+	    
+
+	    return "AgencyDash";
+	}
+	
+	@GetMapping("/SearchVillage")
+	public String findbyVillage(@RequestParam ("fregion") String name , Model m){
+		
+//		System.out.println(name);
+		List<Farmer> farmer = ffs.fetchData(name);
+		m.addAttribute("farmers",farmer);
+		m.addAttribute("showFarmers",true);
+		return "AgencyDash";
+	}
+	
+	@GetMapping("/SearchFarmerName")
+	public String findbyname(@RequestParam ("fname") String frname ,Model m) {
+		List<Farmer> farmerName = ffs.findByname(frname);
+		m.addAttribute("farmers", farmerName);
+		m.addAttribute("showFarmers", true);
+		
+		return "AgencyDash";
+	}
+	
 	
 }
