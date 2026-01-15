@@ -129,7 +129,8 @@ public class Agencies {
     private String village;
 
     public String getVillage() { return village; }
-    public void setVillage(String village) { this.village = village; }
+    public void setVillage(String village) 
+    { this.village = village; }
 
     
 	public Long getAid() {

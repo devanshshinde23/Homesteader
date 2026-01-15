@@ -100,17 +100,7 @@ public class FarmerController {
 	
 	
 	
-	
-//	@GetMapping("/chat") 
-//	@ResponseBody 
-//	public String chat(@RequestParam String message) { // For now, return a simple response // Later, connect to AI service (Azure OpenAI, Copilot APIs, etc.) 
-//		if (message.toLowerCase().contains("fertilizer")) 
-//		{ 
-//			return "Use organic compost or NPK fertilizer depending on soil analysis."; 
-//		} 
-//		return "I'm here to help! Could you tell me more about your question?"; }
-//	}
-//	
+
 	
 	
 	

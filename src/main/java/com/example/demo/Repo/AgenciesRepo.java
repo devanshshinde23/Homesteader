@@ -1,10 +1,12 @@
 package com.example.demo.Repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.Model.Agencies;
+import com.example.demo.Model.Farmer;
 
 public interface AgenciesRepo extends JpaRepository<Agencies,Integer>{
 
@@ -20,6 +22,8 @@ public interface AgenciesRepo extends JpaRepository<Agencies,Integer>{
 	List<Agencies> findByNameContainingIgnoreCase(String name); 
 	
 	long countByStatus(String status);
+
+	Optional<Agencies> findByAid(Long agencyId);
 	
 	
 }

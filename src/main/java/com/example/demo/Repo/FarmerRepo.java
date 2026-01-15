@@ -1,6 +1,7 @@
 package com.example.demo.Repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,6 +14,8 @@ public interface FarmerRepo extends JpaRepository<Farmer,Integer>{
 	List<Farmer> findByFnameIgnoreCaseContaining(String fname);
 	
 	List<Farmer> findByFregion(String name);
+
+	Optional<Farmer> findByFid(Long farmerId);
 	
 	
 }
