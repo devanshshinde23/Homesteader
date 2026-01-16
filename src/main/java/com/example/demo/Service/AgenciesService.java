@@ -19,6 +19,8 @@ public interface AgenciesService {
 	
 	public Long countAgencies();
 
+	public List<Agencies> getAllAgencies();
+
 	
 
 }
