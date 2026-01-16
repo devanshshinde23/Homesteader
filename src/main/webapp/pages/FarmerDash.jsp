@@ -165,7 +165,7 @@
         <a href="#"><i class="fa-solid fa-landmark me-2"></i>Govt Schemes</a>
         <a href="#"><i class="fa-solid fa-headset me-2"></i>Support</a>
         <a href="javascript:void(0)" onclick="toggleChatbot()">
-            <i class="fa-solid fa-robot me-2"></i> AI Chatbot</a>
+            <i class="fa-solid fa-robot me-2"></i> AI ChatBot</a>
         <a href="Logout" class="mt-4"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
     </div>
 
@@ -205,7 +205,7 @@
             <div class="col-md-3">
                 <div class="card-box">
                     <i class="fa-solid fa-landmark"></i>
-                    <h6>Govt Schemes</h6>
+                    <h6>Government Schemes</h6>
                     <p>View subsidies & benefits.</p>
                 </div>
             </div>
@@ -283,7 +283,7 @@
                     <a href="https://pmkisan.gov.in/" target="_blank" class="card service-card text-center">
                         <div class="card-body">
                             <i class="fa-solid fa-hand-holding-dollar fa-2x mb-3 text-success"></i>
-                            <h5>PM-KISAN Samman Nidhi</h5>
+                            <h5>PM-KISAN Sanmann Nidhi</h5>
                             <p>Direct income support for farmers.</p>
                             <button class="btn btn-outline-success mt-2">Visit PM-KISAN</button>
                         </div>

@@ -62,6 +62,12 @@ public class AgenciesDao implements AgenciesService{
 		return ar.count();
 	}
 
+	@Override
+	public List<Agencies> getAllAgencies() {
+		
+		return ar.findAll();
+	}
+
 	
 
 	

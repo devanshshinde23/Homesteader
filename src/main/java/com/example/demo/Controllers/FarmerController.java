@@ -49,17 +49,31 @@ public class FarmerController {
 		return "redirect:/FarmerLogin";
 	}
 	
+//	@GetMapping("/FarmerDash")
+//	public String Farmerdash(HttpSession s1, Model m) {
+//		Farmer FD=(Farmer)s1.getAttribute("temp");
+//		if(FD!=null) {
+//			
+//			m.addAttribute("kk", FD.getFname());
+//			return "FarmerDash";
+//		}
+//		return "redirect:/FarmerLogin";
+//	}
+//	
+	
+	
+
 	@GetMapping("/FarmerDash")
 	public String Farmerdash(HttpSession s1, Model m) {
-		Farmer FD=(Farmer)s1.getAttribute("temp");
-		if(FD!=null) {
-			
-			m.addAttribute("kk", FD.getFname());
-			return "FarmerDash";
-		}
-		return "redirect:/FarmerLogin";
+	    Farmer FD = (Farmer) s1.getAttribute("temp");
+	    if (FD != null) {
+	        m.addAttribute("kk", FD.getFname());
+	        m.addAttribute("agencies", ags.getAllAgencies()); // now strongly typed
+	        return "FarmerDash";
+	    }
+	    return "redirect:/FarmerLogin";
 	}
-	
+
 	@PostMapping("/checkFarmerData")
 	public String Checkfarmer(@RequestParam("username") String u , @RequestParam("password") String p,HttpSession s1, Object f1) {
 		
