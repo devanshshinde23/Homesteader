@@ -11,7 +11,10 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -233,14 +236,14 @@
             <div class="modal fade" id="requestModal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/farmer/requests" method="post">
+                        <form action="/requests/create" method="post">
                             <div class="modal-header">
                                 <h5 class="modal-title">Submit Service Request</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
                                 <input type="hidden" name="agencyId" id="agencyId">
-                                <select name="serviceType" class="form-select mb-2">
+                                <select name="type" class="form-select mb-2">
                                     <option>Seeds</option>
                                     <option>Fertilizer</option>
                                     <option>Equipment</option>
@@ -346,6 +349,16 @@
 </body>
     
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+	  const requestModal = document.getElementById('requestModal');
+	  requestModal.addEventListener('show.bs.modal', event => {
+	    const button = event.relatedTarget; // Button that triggered the modal
+	    const agencyId = button.getAttribute('data-agency-id');
+	    document.getElementById('agencyId').value = agencyId;
+	  });
+	});
+
+
 function toggleChatbot() {
     const chat = document.getElementById("chatbot-container");
     chat.style.display = (chat.style.display === "none" || chat.style.display === "") ? "block" : "none";

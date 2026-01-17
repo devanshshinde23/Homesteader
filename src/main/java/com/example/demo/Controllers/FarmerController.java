@@ -113,7 +113,17 @@ public class FarmerController {
 	}
 	
 	
-	
+	@GetMapping("/requests")
+	public String viewFarmerRequests(HttpSession session, Model model) {
+	    Long farmerId = (Long) session.getAttribute("fid");
+	    if (farmerId != null) {
+	        model.addAttribute("requests", ff.getFarmerRequests(farmerId));
+	        return "FarmerRequests"; // JSP page to show requests
+	    }
+	    return "redirect:/FarmerLogin";
+	}
+
+
 
 	
 	

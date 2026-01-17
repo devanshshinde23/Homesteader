@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Model.Farmer;
+import com.example.demo.Model.ServiceRequest;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public interface FarmerService {
 	public List<Farmer> findByname(String fname);
 
 	public List<Farmer> fetchData(String name);
+
+	List<ServiceRequest> getFarmerRequests(Long farmerId);
 	
 	
 

@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Farmer;
-
+import com.example.demo.Model.ServiceRequest;
 import com.example.demo.Repo.FarmerRepo;
+import com.example.demo.Repo.ServiceRequestRepository;
 import com.example.demo.Service.FarmerService;
 
 @Service
@@ -16,6 +17,8 @@ public class FarmerDao implements FarmerService{
 	@Autowired
 	FarmerRepo fr;
 	
+	@Autowired
+	ServiceRequestRepository sr;
 	
 	
 	
@@ -68,6 +71,9 @@ public class FarmerDao implements FarmerService{
 		return fr.findByFregion(name);
 	}
 	
+	@Override public List<ServiceRequest> getFarmerRequests(Long farmerId) { 
+		return sr.findByFarmer_Fid(farmerId); 
+		}
 	
 
 }
