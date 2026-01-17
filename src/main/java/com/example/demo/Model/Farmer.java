@@ -20,7 +20,7 @@ public class Farmer {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int fid ;
+	private Long fid ;
 	private String fname;
 	private String fMobileNo;
 	private String femail;
@@ -79,11 +79,11 @@ public class Farmer {
 	public void setFcpassword(String fcpassword) {
 		this.fcpassword = fcpassword;
 	}
-	public int getFid() {
+	public Long getFid() {
 		return fid;
 	}
-	public void setFid(int fid) {
-		this.fid = fid;
+	public void setFid(Long fid) {
+		this.fid = (long) fid;
 	}
 	public String getFname() {
 		return fname;

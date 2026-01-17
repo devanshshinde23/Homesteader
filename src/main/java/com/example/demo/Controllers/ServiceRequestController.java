@@ -23,14 +23,14 @@ public class ServiceRequestController {
                                 @RequestParam String type,
                                 @RequestParam String details,
                                 HttpSession session) {
-        Long farmerId = (Long) session.getAttribute("farmerId");
+        Long farmerId = (Long) session.getAttribute("fid");
         service.createRequest(farmerId, agencyId, type, details);
-        return "redirect:/farmer/requests";
+        return "redirect:/requests/farmer";
     }
 
     @GetMapping("/farmer")
     public String viewFarmerRequests(HttpSession session, Model model) {
-        Long farmerId = (Long) session.getAttribute("farmerId");
+        Long farmerId = (Long) session.getAttribute("fid");
         model.addAttribute("requests", service.getFarmerRequests(farmerId));
         return "farmer/requests";
     }
