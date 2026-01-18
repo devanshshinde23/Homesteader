@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -15,8 +16,15 @@ import javax.persistence.Table;
 public class ServiceRequest {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    private String type;
 
-    @ManyToOne @JoinColumn(name = "farmer_id")
+    private Integer quantity;  
+    private String unit;
+    
+    private LocalDate preferredDate; 
+    private String deliveryMode;
+	@ManyToOne @JoinColumn(name = "farmer_id")
     private Farmer farmer;
 
     @ManyToOne @JoinColumn(name = "agency_id")
@@ -25,13 +33,32 @@ public class ServiceRequest {
     private String serviceType;
     private String details;
     private String status; // PENDING, ACCEPTED, etc.
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	public Farmer getFarmer() {
 		return farmer;
@@ -63,24 +90,27 @@ public class ServiceRequest {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
+	
+	
+	
+	public LocalDate getPreferredDate() {
+		return preferredDate;
 	}
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
+	public void setPreferredDate(LocalDate preferredDate) {
+		this.preferredDate = preferredDate;
 	}
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
+	public String getDeliveryMode() {
+		return deliveryMode;
 	}
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setDeliveryMode(String deliveryMode) {
+		this.deliveryMode = deliveryMode;
 	}
 	@Override
 	public String toString() {
-		return "ServiceRequest [id=" + id + ", farmer=" + farmer + ", agency=" + agency + ", serviceType=" + serviceType
-				+ ", details=" + details + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + "]";
+		return "ServiceRequest [id=" + id + ", type=" + type + ", farmer=" + farmer + ", agency=" + agency
+				+ ", serviceType=" + serviceType + ", details=" + details + ", status=" + status + "]";
 	}
+	
     
     
 }

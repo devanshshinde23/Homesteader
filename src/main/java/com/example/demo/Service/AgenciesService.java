@@ -20,6 +20,8 @@ public interface AgenciesService {
 	public Long countAgencies();
 
 	public List<Agencies> getAllAgencies();
+	
+	public Agencies findById(Long id) ;
 
 	
 

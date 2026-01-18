@@ -140,6 +140,59 @@
 
     </div>
 
+	<!-- Farmer Service Requests Table -->
+<div class="card card-custom p-4 mt-4">
+    <h4 class="mb-3">Farmer Service Requests</h4>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Farmer</th>
+            <th>Type</th>
+            <th>Details</th>
+            <th>Quantity</th>
+            <th>Preferred Date</th>
+            <th>Delivery Mode</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <c:forEach items="${requests}" var="req">
+            <tr>
+                <td>${req.id}</td>
+                <td>${req.farmer.fname}</td>
+                <td>${req.type}</td>
+                <td>${req.details}</td>
+                <td>${req.quantity} ${req.unit}</td>
+                <td>${req.preferredDate}</td>
+                <td>${req.deliveryMode}</td>
+                <td>
+                    <span class="badge 
+                          ${req.status == 'Approved' ? 'bg-success' : 
+                            req.status == 'Rejected' ? 'bg-danger' : 'bg-warning text-dark'} 
+                          badge-status">
+                        ${req.status}
+                    </span>
+                </td>
+                <td>
+                    <form action="/requests/update/${req.id}" method="post">
+                        <select name="status" class="form-select form-select-sm">
+                            <option ${req.status == 'Pending' ? 'selected' : ''}>Pending</option>
+                            <option ${req.status == 'Approved' ? 'selected' : ''}>Approved</option>
+                            <option ${req.status == 'Rejected' ? 'selected' : ''}>Rejected</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm mt-1">Update</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+	
     <!-- Search Bar -->
     <div class="card card-custom p-4 mb-4">
         <h5 class="mb-3">Search Training Requests</h5>

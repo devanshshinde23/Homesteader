@@ -18,6 +18,7 @@ import com.example.demo.Model.Agencies;
 import com.example.demo.Model.Farmer;
 import com.example.demo.Service.AgenciesService;
 import com.example.demo.Service.FarmerService;
+import com.example.demo.Service.ServiceRequestService;
 
 @Controller
 public class AgroAgenciesController {
@@ -28,6 +29,8 @@ public class AgroAgenciesController {
 	@Autowired 
 	FarmerService ffs;
 	
+	@Autowired 
+	ServiceRequestService service;
 	
 	@GetMapping("/AgenciesRegistration")
 	public String Areg() {
@@ -54,27 +57,56 @@ public class AgroAgenciesController {
 	{
 		Agencies ar=as.checkAgency(u,p);
 		if(ar!=null) {
+			s1.setAttribute("agencyId", ar.getAid());
 			s1.setAttribute("temp", ar.getUsername());
 		return "redirect:/AgencyDash";
 		}
 		return "redirect:/AgenciesLogin";
 	}
 	
+//	@GetMapping("/AgencyDash")
+//	public String agencydash(HttpSession s1 , Model m ) {
+//		
+//		
+//		if(s1.getAttribute("temp")!=null) {
+//			String x =(String)s1.getAttribute("temp");
+//			
+//			m.addAttribute("xx",x);
+//			
+//			return "AgencyDash";
+//			
+//			
+//		}
+//		return "AgenciesLogin";
+//	}
+	
+//	@GetMapping("/AgencyDash")
+//	 public String agencydash(HttpSession s1 , Model m ) 
+//	{
+//	 	if(s1.getAttribute("temp")!=null) 
+//		{
+//	 	String username =(String)s1.getAttribute("temp"); 
+//		m.addAttribute("xx", username); 
+//		Agencies agency = as.fetchSingleRecord(username); 
+//		Long agencyId = agency.getAid(); //  
+//		m.addAttribute("requests", service.getAgencyRequests(agencyId)); 
+//		return "AgencyDash";
+//		 } return "AgenciesLogin"; 
+//		 
+//	}
+	
 	@GetMapping("/AgencyDash")
-	public String agencydash(HttpSession s1 , Model m ) {
-		
-		
-		if(s1.getAttribute("temp")!=null) {
-			String x =(String)s1.getAttribute("temp");
-			
-			m.addAttribute("xx",x);
-			
-			return "AgencyDash";
-			
-			
-		}
-		return "AgenciesLogin";
+	public String agencydash(HttpSession s1, Model m) {
+	    Long agencyId = (Long) s1.getAttribute("agencyId"); // ✅ get agencyId
+	    if (agencyId != null) {
+	        m.addAttribute("requests", service.getAgencyRequests(agencyId));
+	        m.addAttribute("agency", as.findById(agencyId)); // optional, for profile info
+	        return "AgencyDash";
+	    }
+	    return "AgenciesLogin"; // fallback if not logged in
 	}
+
+	
 	
 	@GetMapping("/Alogout")
 	public String logout(HttpSession s1) {
