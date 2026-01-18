@@ -1,8 +1,11 @@
 package com.example.demo.Controllers;
 
+import java.time.LocalDate;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,21 +21,36 @@ public class ServiceRequestController {
     @Autowired
     private ServiceRequestService service;
 
+//    @PostMapping("/create")
+//    public String createRequest(@RequestParam Long agencyId,
+//                                @RequestParam String type,
+//                                @RequestParam String details,
+//                                HttpSession session) {
+//        Long farmerId = (Long) session.getAttribute("fid");
+//        service.createRequest(farmerId, agencyId, type, details);
+//        return "redirect:/requests/farmer";
+//    }
+    
     @PostMapping("/create")
     public String createRequest(@RequestParam Long agencyId,
                                 @RequestParam String type,
                                 @RequestParam String details,
+                                @RequestParam Integer quantity,
+                                @RequestParam String unit,
+                                @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate preferredDate,
+                                @RequestParam String deliveryMode,
                                 HttpSession session) {
         Long farmerId = (Long) session.getAttribute("fid");
-        service.createRequest(farmerId, agencyId, type, details);
-        return "redirect:/requests/farmer";
+        service.createRequest(farmerId, agencyId, type, details, quantity, unit, preferredDate, deliveryMode);
+        return "redirect:/FarmerDash";
     }
+
 
     @GetMapping("/farmer")
     public String viewFarmerRequests(HttpSession session, Model model) {
         Long farmerId = (Long) session.getAttribute("fid");
         model.addAttribute("requests", service.getFarmerRequests(farmerId));
-        return "farmer/requests";
+        return "FarmerRequests";
     }
 
     @GetMapping("/agency")
@@ -45,6 +63,6 @@ public class ServiceRequestController {
     @PostMapping("/update/{id}")
     public String updateStatus(@PathVariable Long id, @RequestParam String status) {
         service.updateStatus(id, status);
-        return "redirect:/agency/requests";
+        return "redirect:/AgencyDash";
     }
 }

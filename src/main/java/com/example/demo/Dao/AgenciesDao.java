@@ -68,6 +68,9 @@ public class AgenciesDao implements AgenciesService{
 		return ar.findAll();
 	}
 
+	public Agencies findById(Long id) 
+	{ return ar.findByAid(id).orElse(null); 
+	}
 	
 
 	
