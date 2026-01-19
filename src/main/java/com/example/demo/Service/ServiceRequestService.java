@@ -16,4 +16,8 @@ public interface ServiceRequestService {
 	ServiceRequest updateStatus(Long requestId, String status);
 	public void createRequest(Long farmerFid, Long agencyAid, String type, String details,
             Integer quantity, String unit, LocalDate preferredDate, String deliveryMode);
+	
+	
+	public long countAllByAgency(Long agencyId); 
+	public long countByStatus(Long agencyId, String status); 
 }

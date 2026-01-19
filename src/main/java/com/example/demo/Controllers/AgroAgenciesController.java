@@ -95,18 +95,70 @@ public class AgroAgenciesController {
 //		 
 //	}
 	
+//	@GetMapping("/AgencyDash")
+//	public String agencydash(HttpSession s1, Model m) {
+//	    Long agencyId = (Long) s1.getAttribute("agencyId"); // ✅ get agencyId
+//	    if (agencyId != null) {
+//	        m.addAttribute("requests", service.getAgencyRequests(agencyId));
+//	        m.addAttribute("agency", as.findById(agencyId)); // optional, for profile info
+//	        
+//	        m.addAttribute("totalRequests", service.countAllByAgency(agencyId)); 
+//	        m.addAttribute("approvedRequests", service.countByStatus(agencyId, "Approved")); 
+//	        m.addAttribute("pendingRequests", service.countByStatus(agencyId, "Pending"));
+//	        
+//	     // farmers toggle 
+//	        Boolean showFarmers = (Boolean) s1.getAttribute("showFarmers");
+//	        if (showFarmers == null || !showFarmers) 
+//	        { 
+//	        	s1.setAttribute("showFarmers", true); 
+//	        	
+//	        } else 
+//	        {
+//	        	s1.setAttribute("showFarmers", false);
+//	        	}
+//	        return "redirect:/AgencyDash";
+//	    }
+//	    return "AgenciesLogin"; // fallback if not logged in
+//	}
+//
+//	
+	
 	@GetMapping("/AgencyDash")
 	public String agencydash(HttpSession s1, Model m) {
-	    Long agencyId = (Long) s1.getAttribute("agencyId"); // ✅ get agencyId
+	    Long agencyId = (Long) s1.getAttribute("agencyId");
 	    if (agencyId != null) {
+	        // always load requests and counts
 	        m.addAttribute("requests", service.getAgencyRequests(agencyId));
-	        m.addAttribute("agency", as.findById(agencyId)); // optional, for profile info
+	        m.addAttribute("agency", as.findById(agencyId));
+	        m.addAttribute("totalRequests", service.countAllByAgency(agencyId));
+	        m.addAttribute("approvedRequests", service.countByStatus(agencyId, "Approved"));
+	        m.addAttribute("pendingRequests", service.countByStatus(agencyId, "Pending"));
+
+	        // farmer toggle
+	        Boolean showFarmers = (Boolean) s1.getAttribute("showFarmers");
+	        if (showFarmers != null && showFarmers) {
+	            m.addAttribute("farmers", ffs.Display());
+	            m.addAttribute("showFarmers", true);
+	        } else {
+	            m.addAttribute("showFarmers", false);
+	        }
+
 	        return "AgencyDash";
 	    }
-	    return "AgenciesLogin"; // fallback if not logged in
+	    return "AgenciesLogin";
 	}
 
-	
+	@GetMapping("/toggleFarmers")
+	public String toggleFarmers(HttpSession session) {
+	    Boolean showFarmers = (Boolean) session.getAttribute("showFarmers");
+	    if (showFarmers == null || !showFarmers) {
+	        session.setAttribute("showFarmers", true);
+	    } else {
+	        session.setAttribute("showFarmers", false);
+	    }
+	    return "redirect:/AgencyDash"; // reload dashboard with updated flag
+	}
+
 	
 	@GetMapping("/Alogout")
 	public String logout(HttpSession s1) {
@@ -143,17 +195,20 @@ public class AgroAgenciesController {
 	@GetMapping("/AgencyViewfarmer")
 	public String viewFarmer(HttpSession session, Model model) {
 
-	    Boolean showFarmers = (Boolean) session.getAttribute("showFarmers");
-
-	    // toggle logic
-	    if (showFarmers == null || showFarmers == false) {
-	        showFarmers = true;
-	        model.addAttribute("farmers", ffs.Display()); // load data only when showing
-	    } 
-	    model.addAttribute("showFarmers", true); 
+//	    Boolean showFarmers = (Boolean) session.getAttribute("showFarmers");
+//
+//	    // toggle logic
+//	    if (showFarmers == null || showFarmers == false) {
+//	        showFarmers = true;
+//	        model.addAttribute("farmers", ffs.Display()); // load data only when showing
+//	    } 
+		
+		session.setAttribute("showFarmers", true);
+//	    model.addAttribute("showFarmers", true); 
 	    
+		return "redirect:/AgencyDash";
 
-	    return "AgencyDash";
+	    
 	}
 	
 	@GetMapping("/SearchVillage")

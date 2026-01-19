@@ -93,7 +93,7 @@
     <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
     <a href="AgencyViewfarmer"><i class="bi bi-person-lines-fill"></i> Farmers</a>
     <a href="#"><i class="bi bi-mortarboard"></i> Students</a>
-    <a href="#"><i class="bi bi-journal-check"></i> Training Requests</a>
+    <a href="/AgencyDash"><i class="bi bi-journal-check"></i> Service Requests</a>
     <a href="#"><i class="bi bi-gear"></i> Settings</a>
 
     <hr style="color: white;">
@@ -127,14 +127,14 @@
         <div class="col-md-4">
             <div class="card card-custom p-3">
                 <h5>Approved</h5>
-                <h3 class="text-success fw-bold">${approved}</h3>
+                <h3 class="text-success fw-bold">${approvedRequests}</h3>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="card card-custom p-3">
                 <h5>Pending</h5>
-                <h3 class="text-warning fw-bold">${pending}</h3>
+                <h3 class="text-warning fw-bold">${pendingRequests}</h3>
             </div>
         </div>
 
@@ -194,6 +194,7 @@
 </div>
 	
     <!-- Search Bar -->
+    <!--  
     <div class="card card-custom p-4 mb-4">
         <h5 class="mb-3">Search Training Requests</h5>
         <form method="get" action="searchRequests">
@@ -221,9 +222,9 @@
             </div>
         </form>
     </div>
-
+-->
     <!-- Training Requests Table -->
-    <div class="card card-custom p-4">
+   <!--   <div class="card card-custom p-4">
         <h4 class="mb-3">Training Requests</h4>
 
         <table class="table table-hover">
@@ -270,7 +271,13 @@
         </table>
 
     </div>
+-->
 
+<a href="/toggleFarmers" class="btn btn-secondary mb-3"> 
+<c:choose> <c:when test="${showFarmers}">Hide Farmers</c:when>
+ <c:otherwise>Show Farmers</c:otherwise> 
+ </c:choose> 
+ </a>
 	<div class="overlay">
 		<c:if test="${showFarmers}">
 			

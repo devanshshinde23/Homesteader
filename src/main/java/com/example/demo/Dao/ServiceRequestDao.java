@@ -74,5 +74,14 @@ req.setStatus("Pending");
 dao.save(req);
 }
 
+	public long countAllByAgency(Long agencyId) 
+	{
+		return dao.countByAgency_Aid(agencyId);
+	} 
+	
+	public long countByStatus(Long agencyId, String status) 
+	{ 
+		return dao.countByAgency_AidAndStatus(agencyId, status); 
+	}
 
 }
