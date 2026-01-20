@@ -12,7 +12,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 	
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	
     <!-- Icons -->
@@ -148,7 +148,27 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   background: #e6ffe6;
 }
-        
+      
+   #requestModal .modal-dialog {
+  --bs-modal-width: 520px; /* Bootstrap 5 variable */
+  max-width: 90vw;          /* fallback for smaller screens */
+}
+
+#requestModal .modal-content {
+  width: auto;
+}
+
+#requestModal .modal-body {
+  padding: 1rem;
+}
+
+#requestModal .form-control,
+#requestModal .form-select {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+   
 
     </style>
 
@@ -234,7 +254,7 @@
 
             <!-- Request Modal -->
             <div class="modal fade" id="requestModal" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog ">
                     <div class="modal-content">
                         <form action="/requests/create" method="post">
                             <div class="modal-header">
@@ -286,7 +306,7 @@
                     <a href="https://pmkisan.gov.in/" target="_blank" class="card service-card text-center">
                         <div class="card-body">
                             <i class="fa-solid fa-hand-holding-dollar fa-2x mb-3 text-success"></i>
-                            <h5>PM-KISAN Sanmann Nidhi</h5>
+                            <h5>PM-KISAN Sanman Nidhi</h5>
                             <p>Direct income support for farmers.</p>
                             <button class="btn btn-outline-success mt-2">Visit PM-KISAN</button>
                         </div>
