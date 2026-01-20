@@ -64,64 +64,7 @@ public class AgroAgenciesController {
 		return "redirect:/AgenciesLogin";
 	}
 	
-//	@GetMapping("/AgencyDash")
-//	public String agencydash(HttpSession s1 , Model m ) {
-//		
-//		
-//		if(s1.getAttribute("temp")!=null) {
-//			String x =(String)s1.getAttribute("temp");
-//			
-//			m.addAttribute("xx",x);
-//			
-//			return "AgencyDash";
-//			
-//			
-//		}
-//		return "AgenciesLogin";
-//	}
-	
-//	@GetMapping("/AgencyDash")
-//	 public String agencydash(HttpSession s1 , Model m ) 
-//	{
-//	 	if(s1.getAttribute("temp")!=null) 
-//		{
-//	 	String username =(String)s1.getAttribute("temp"); 
-//		m.addAttribute("xx", username); 
-//		Agencies agency = as.fetchSingleRecord(username); 
-//		Long agencyId = agency.getAid(); //  
-//		m.addAttribute("requests", service.getAgencyRequests(agencyId)); 
-//		return "AgencyDash";
-//		 } return "AgenciesLogin"; 
-//		 
-//	}
-	
-//	@GetMapping("/AgencyDash")
-//	public String agencydash(HttpSession s1, Model m) {
-//	    Long agencyId = (Long) s1.getAttribute("agencyId"); // ✅ get agencyId
-//	    if (agencyId != null) {
-//	        m.addAttribute("requests", service.getAgencyRequests(agencyId));
-//	        m.addAttribute("agency", as.findById(agencyId)); // optional, for profile info
-//	        
-//	        m.addAttribute("totalRequests", service.countAllByAgency(agencyId)); 
-//	        m.addAttribute("approvedRequests", service.countByStatus(agencyId, "Approved")); 
-//	        m.addAttribute("pendingRequests", service.countByStatus(agencyId, "Pending"));
-//	        
-//	     // farmers toggle 
-//	        Boolean showFarmers = (Boolean) s1.getAttribute("showFarmers");
-//	        if (showFarmers == null || !showFarmers) 
-//	        { 
-//	        	s1.setAttribute("showFarmers", true); 
-//	        	
-//	        } else 
-//	        {
-//	        	s1.setAttribute("showFarmers", false);
-//	        	}
-//	        return "redirect:/AgencyDash";
-//	    }
-//	    return "AgenciesLogin"; // fallback if not logged in
-//	}
-//
-//	
+
 	
 	@GetMapping("/AgencyDash")
 	public String agencydash(HttpSession s1, Model m) {
@@ -142,24 +85,24 @@ public class AgroAgenciesController {
 	        } else {
 	            m.addAttribute("showFarmers", false);
 	        }
+	        
+	     // Service requests table 
+	        Boolean showRequests = (Boolean) s1.getAttribute("showRequests"); 
+	        if (showRequests != null && showRequests)
+	        {
+	        		m.addAttribute("requests", service.getAgencyRequests(agencyId));
+	        		m.addAttribute("showRequests", true); 
+	        	} else 
+	        	{ 
+	        		m.addAttribute("showRequests", false); 
+	        	}
 
 	        return "AgencyDash";
 	    }
 	    return "AgenciesLogin";
 	}
 
-	@GetMapping("/toggleFarmers")
-	public String toggleFarmers(HttpSession session) {
-	    Boolean showFarmers = (Boolean) session.getAttribute("showFarmers");
-	    if (showFarmers == null || !showFarmers) {
-	        session.setAttribute("showFarmers", true);
-	    } else {
-	        session.setAttribute("showFarmers", false);
-	    }
-	    return "redirect:/AgencyDash"; // reload dashboard with updated flag
-	}
 
-	
 	@GetMapping("/Alogout")
 	public String logout(HttpSession s1) {
 		s1.invalidate();
@@ -192,24 +135,8 @@ public class AgroAgenciesController {
 		return("AdminDash");
 	}
 	
-	@GetMapping("/AgencyViewfarmer")
-	public String viewFarmer(HttpSession session, Model model) {
 
-//	    Boolean showFarmers = (Boolean) session.getAttribute("showFarmers");
-//
-//	    // toggle logic
-//	    if (showFarmers == null || showFarmers == false) {
-//	        showFarmers = true;
-//	        model.addAttribute("farmers", ffs.Display()); // load data only when showing
-//	    } 
-		
-		session.setAttribute("showFarmers", true);
-//	    model.addAttribute("showFarmers", true); 
-	    
-		return "redirect:/AgencyDash";
-
-	    
-	}
+	@GetMapping("/showRequests") public String showRequests(HttpSession session) { session.setAttribute("showRequests", true); session.setAttribute("showFarmers", false); return "redirect:/AgencyDash"; } @GetMapping("/showFarmers") public String showFarmers(HttpSession session) { session.setAttribute("showFarmers", true); session.setAttribute("showRequests", false); return "redirect:/AgencyDash"; }
 	
 	@GetMapping("/SearchVillage")
 	public String findbyVillage(@RequestParam ("fregion") String name , Model m){

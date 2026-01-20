@@ -91,9 +91,9 @@
     </h3>
 
     <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
-    <a href="AgencyViewfarmer"><i class="bi bi-person-lines-fill"></i> Farmers</a>
+    <a href="/showFarmers"><i class="bi bi-person-lines-fill"></i> Farmers</a>
     <a href="#"><i class="bi bi-mortarboard"></i> Students</a>
-    <a href="/AgencyDash"><i class="bi bi-journal-check"></i> Service Requests</a>
+    <a href="/showRequests"><i class="bi bi-journal-check"></i> Service Requests</a>
     <a href="#"><i class="bi bi-gear"></i> Settings</a>
 
     <hr style="color: white;">
@@ -141,7 +141,9 @@
     </div>
 
 	<!-- Farmer Service Requests Table -->
+
 <div class="card card-custom p-4 mt-4">
+<c:if test="${showRequests}">
     <h4 class="mb-3">Farmer Service Requests</h4>
 
     <table class="table table-hover">
@@ -191,6 +193,7 @@
         </c:forEach>
         </tbody>
     </table>
+  </c:if>  
 </div>
 	
     <!-- Search Bar -->
@@ -273,11 +276,7 @@
     </div>
 -->
 
-<a href="/toggleFarmers" class="btn btn-secondary mb-3"> 
-<c:choose> <c:when test="${showFarmers}">Hide Farmers</c:when>
- <c:otherwise>Show Farmers</c:otherwise> 
- </c:choose> 
- </a>
+
 	<div class="overlay">
 		<c:if test="${showFarmers}">
 			
