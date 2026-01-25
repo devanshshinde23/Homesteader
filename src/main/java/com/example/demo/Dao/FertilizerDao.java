@@ -29,5 +29,18 @@ public class FertilizerDao implements FertilizerService{
 		fr.save(f1);
 		
 	}
+	
+	public  Fertilizer findById(Long fertilizerId) {
+		
+		return findById(fertilizerId);
+	}
+
+	@Override
+	public Object getAllFertilizers() {
+		
+		return fr.findAll();
+	}
+	
+	
 
 }

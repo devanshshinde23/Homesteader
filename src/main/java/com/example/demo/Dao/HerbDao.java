@@ -28,4 +28,10 @@ public class HerbDao implements HerbService  {
 		hr.save(h1);
 	}
 
+	@Override
+	public Object getAllHerbs() {
+		
+		return hr.findAll();
+	}
+
 }

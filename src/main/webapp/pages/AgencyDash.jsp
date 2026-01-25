@@ -338,6 +338,144 @@
 				</div>
 			
 		</c:if>
+		
+</div>		
+		
+<!-- CROPS TABLE -->
+<h4>Available Crops</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer</th>
+            <th>Crop Name</th>
+            <th>Quantity</th>
+            
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${crops}" var="c">
+            <tr>
+                <td>${c.farmer.fname}</td>
+                <td>${c.cropName}</td>
+                <td>${c.quantity}</td>
+               
+                <td>${c.price}</td>
+                <td>
+                    <form action="/buyCrop" method="post" class="d-inline">
+                        <input type="hidden" name="cropId" value="${c.cropId}" />
+                        <input type="number" name="quantity" min="1" max="${c.quantity}" required />
+                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+
+
+<!-- FERTILIZER TABLE -->
+<h4>Available Fertilizers</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer</th>
+            <th>Fertilizer Name</th>
+            <th>Quantity</th>
+            
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${fertilizers}" var="f">
+            <tr>
+                <td>${f.farmer.fname}</td>
+                <td>${f.fertilizerName}</td>
+                <td>${f.quantity}</td>
+                
+                <td>${f.price}</td>
+                <td>
+                    <form action="/buyFertilizer" method="post" class="d-inline">
+                        <input type="hidden" name="fertilizerId" value="${f.fertilizerId}" />
+                        <input type="number" name="quantity" min="1" max="${f.quantity}" required />
+                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+
+
+<!-- SEEDS TABLE -->
+<h4>Available Seeds</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer</th>
+            <th>Seed Name</th>
+            <th>Quantity</th>
+            
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${seeds}" var="s">
+            <tr>
+                <td>${s.farmer.fname}</td>
+                <td>${s.seedName}</td>
+                <td>${s.quantity}</td>
+                
+                <td>${s.price}</td>
+                <td>
+                    <form action="/buySeed" method="post" class="d-inline">
+                        <input type="hidden" name="seedId" value="${s.seedid}" />
+                        <input type="number" name="quantity" min="1" max="${s.quantity}" required />
+                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+
+
+<!-- HERBS TABLE -->
+<h4>Available Herbs</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer</th>
+            <th>Herb Name</th>
+            <th>Quantity</th>
+            
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${herbs}" var="h">
+            <tr>
+                <td>${h.farmer.fname}</td>
+                <td>${h.herbName}</td>
+                <td>${h.quantity}</td>
+                
+                <td>${h.price}</td>
+                <td>
+                    <form action="/buyHerb" method="post" class="d-inline">
+                        <input type="hidden" name="herbId" value="${h.herbid}" />
+                        <input type="number" name="quantity" min="1" max="${h.quantity}" required />
+                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+		
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

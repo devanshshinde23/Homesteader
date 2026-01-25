@@ -23,7 +23,7 @@ public interface AgenciesRepo extends JpaRepository<Agencies,Integer>{
 	
 	long countByStatus(String status);
 
-	Optional<Agencies> findByAid(Long agencyId);
+	Optional<Agencies> findByAid(Long id);
 	
 	
 }

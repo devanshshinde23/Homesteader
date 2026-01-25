@@ -1,5 +1,7 @@
 package com.example.demo.Dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +28,19 @@ public void AddCrop(Crop c1, int fid) {
 
     cr.save(c1);
 	}
+
+ 
+public List<Crop> getAllCrops()
+{ return cr.findAll();
 }
+
+
+public  Crop findById(int cropId) {
+	
+	return cr.findByCropId(cropId);
+}
+
+
+
+}
+

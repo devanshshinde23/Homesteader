@@ -28,4 +28,10 @@ public class SeedDao implements SeedService{
 		
 	}
 
+	@Override
+	public Object getAllSeeds() {
+		
+		return sr.findAll();
+	}
+
 }

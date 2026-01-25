@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,9 +16,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Model.Agencies;
+import com.example.demo.Model.Crop;
 import com.example.demo.Model.Farmer;
+import com.example.demo.Model.Fertilizer;
+import com.example.demo.Model.ServiceRequest;
+import com.example.demo.Repo.CropRepo;
+import com.example.demo.Repo.FertilizerRepo;
+import com.example.demo.Repo.HerbRepo;
+import com.example.demo.Repo.SeedRepo;
 import com.example.demo.Service.AgenciesService;
+import com.example.demo.Service.CropService;
 import com.example.demo.Service.FarmerService;
+import com.example.demo.Service.FertilizerService;
+import com.example.demo.Service.HerbService;
+import com.example.demo.Service.SeedService;
 import com.example.demo.Service.ServiceRequestService;
 
 @Controller
@@ -31,6 +43,27 @@ public class AgroAgenciesController {
 	
 	@Autowired 
 	ServiceRequestService service;
+	
+	@Autowired 
+	CropService cs;
+	
+	@Autowired 
+	FertilizerService FS;
+	
+	@Autowired 
+	FertilizerRepo Fr;
+	
+	@Autowired
+	SeedRepo SR;
+	
+	@Autowired 
+	HerbRepo Hr;
+	
+	@Autowired 
+	HerbService HS;
+	
+	@Autowired 
+	SeedService sc;
 	
 	@GetMapping("/AgenciesRegistration")
 	public String Areg() {
@@ -76,7 +109,14 @@ public class AgroAgenciesController {
 	        m.addAttribute("totalRequests", service.countAllByAgency(agencyId));
 	        m.addAttribute("approvedRequests", service.countByStatus(agencyId, "Approved"));
 	        m.addAttribute("pendingRequests", service.countByStatus(agencyId, "Pending"));
+	        
+	        m.addAttribute("crops", cs.getAllCrops()); 
+	        m.addAttribute("fertilizers", FS.getAllFertilizers()); 
+	        m.addAttribute("seeds", sc.getAllSeeds());
+	        m.addAttribute("herbs", HS.getAllHerbs());
 
+	        
+//	        m.addAttribute("requests", service.getAgencyRequests(agencyId));
 	        // farmer toggle
 	        Boolean showFarmers = (Boolean) s1.getAttribute("showFarmers");
 	        if (showFarmers != null && showFarmers) {
@@ -158,4 +198,59 @@ public class AgroAgenciesController {
 	}
 	
 	
+	// 
+	// Show farmer inventory on Agency Dashboard
+	@GetMapping("/browseInventory")
+	public String browseInventory(Model model) {
+	    model.addAttribute("crops", cs.getAllCrops());
+	    model.addAttribute("fertilizers", Fr.findAll());
+	    model.addAttribute("seeds", SR.findAll());
+	    model.addAttribute("herbs", Hr.findAll());
+	    return "AgencyDash"; // reuse dashboard view
+	}
+	
+	@PostMapping("/buyCrop") 
+	public String buyCrop(@RequestParam int cropId, @RequestParam int quantity, HttpSession session) 
+	{ 
+		Long agencyId =  (Long) session.getAttribute("agencyId"); 
+	Agencies agency = as.findById(agencyId); 
+	service.buyCrop(cropId, quantity, agency);
+	return "redirect:/AgencyDash";
+	}
+	
+	@PostMapping("/buyFertilizer")
+	public String buyFertilizer(@RequestParam int fertilizerId, @RequestParam int quantity, HttpSession session) 
+	{ 
+		
+	Long agencyId =  (Long) session.getAttribute("agencyId"); 
+	Agencies agency = as.findById(agencyId); 
+	service.buyFertilizer(fertilizerId, quantity, agency); 
+	return "redirect:/AgencyDash"; 
+	
+	} 
+	
+	@PostMapping("/buySeed") 
+	public String buySeed(@RequestParam int seedId, @RequestParam int quantity, HttpSession session) 
+	
+	{ 
+		Long agencyId =  (Long) session.getAttribute("agencyId");
+		Agencies agency = as.findById(agencyId);
+		service.buySeed(seedId, quantity, agency); 
+		return "redirect:/AgencyDash"; 
+		
+	} 
+	
+	@PostMapping("/buyHerb")
+	public String buyHerb(@RequestParam int herbId, @RequestParam int quantity, HttpSession session)
+	
+	{
+		Long agencyId =  (Long) session.getAttribute("agencyId"); 
+		Agencies agency = as.findById(agencyId);
+		service.buyHerb(herbId, quantity, agency); 
+		return "redirect:/AgencyDash"; 
+		
+	}
+
+	
+
 }

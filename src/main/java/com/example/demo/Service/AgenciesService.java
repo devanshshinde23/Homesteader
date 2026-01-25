@@ -21,7 +21,9 @@ public interface AgenciesService {
 
 	public List<Agencies> getAllAgencies();
 	
-	public Agencies findById(Long id) ;
+	
+
+	public Agencies findById(Long agencyId);
 
 	
 
