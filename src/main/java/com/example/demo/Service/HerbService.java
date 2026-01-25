@@ -7,4 +7,6 @@ public interface HerbService {
 
 	void addHerb(Herb herb, Integer fid);
 
+	Object getAllHerbs();
+
 }

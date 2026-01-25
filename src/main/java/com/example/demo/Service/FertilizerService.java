@@ -6,4 +6,8 @@ public interface FertilizerService {
 
 	public void AddFertilizer(Fertilizer f1, Integer farmerId);
 
+	public  Fertilizer findById(Long fertilizerId);
+
+	public Object getAllFertilizers();
+
 }

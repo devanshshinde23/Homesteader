@@ -3,8 +3,8 @@ package com.example.demo.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-
-
+import com.example.demo.Model.Agencies;
+import com.example.demo.Model.Farmer;
 import com.example.demo.Model.ServiceRequest;
 
 
@@ -20,4 +20,24 @@ public interface ServiceRequestService {
 	
 	public long countAllByAgency(Long agencyId); 
 	public long countByStatus(Long agencyId, String status); 
+	
+	public void buyCrop(int cropId, int quantity, Agencies agency);
+	
+	public void buyFertilizer(int fertId, int quantity, Agencies agency);
+	
+	public void buySeed(int seedId, int quantity, Agencies agency);
+	
+	public void buyHerb(int herbId, int quantity, Agencies agency);
+	
+//	public void buyCrop(Long agencyId, int cropId, int quantity, Agencies agency, Farmer farmer);
+//	
+//	public void buyFertilizer(Long agencyId, int fertId, int quantity, Agencies agency, Farmer farmer) ;
+//	
+//	public void buySeed(Long agencyId, int seedId, int quantity, Agencies agency, Farmer farmer) ;
+//	
+//	public void buyHerb(Long agencyId, int herbId, int quantity, Agencies agency, Farmer farmer) ;
+	
+	void save(ServiceRequest req);
+	
+	 
 }
