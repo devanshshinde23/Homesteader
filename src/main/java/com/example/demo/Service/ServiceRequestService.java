@@ -13,7 +13,7 @@ public interface ServiceRequestService {
 //	ServiceRequest createRequest(Long farmerId, Long agencyId, String type, String details); 
 	List<ServiceRequest> getFarmerRequests(Long farmerId);
 	List<ServiceRequest> getAgencyRequests(Long agencyId); 
-	ServiceRequest updateStatus(Long requestId, String status);
+	ServiceRequest updateStatus(int id, String status);
 	public void createRequest(Long farmerFid, Long agencyAid, String type, String details,
             Integer quantity, String unit, LocalDate preferredDate, String deliveryMode);
 	
@@ -38,6 +38,14 @@ public interface ServiceRequestService {
 //	public void buyHerb(Long agencyId, int herbId, int quantity, Agencies agency, Farmer farmer) ;
 	
 	void save(ServiceRequest req);
+	
+	public long countAllByFarmer(Long farmerId); 
+	
+	public long countByFarmerStatus(Long farmerId, String status);
+	ServiceRequest updateStatus(Long requestId, String status);
+	
+	
+	
 	
 	 
 }

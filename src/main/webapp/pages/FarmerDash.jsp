@@ -288,6 +288,45 @@
 
         </div>
 
+
+		<h3>Incoming Requests</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Agency</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${requests}" var="r">
+            <tr>
+                <td>${r.agency.username}</td>
+                <td>
+                    <c:if test="${r.crop != null}">Crop: ${r.crop.cropName}</c:if>
+                    <c:if test="${r.fertilizer != null}">Fertilizer: ${r.fertilizer.fertilizerName}</c:if>
+                    <c:if test="${r.seed != null}">Seed: ${r.seed.seedName}</c:if>
+                    <c:if test="${r.herb != null}">Herb: ${r.herb.herbName}</c:if>
+                </td>
+                <td>${r.quantity} ${r.unit}</td>
+                <td>${r.status}</td>
+                <td>
+                    <c:if test="${r.status eq 'Pending'}">
+                        <form action="/approveRequest/${r.id}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                        </form>
+                        <form action="/rejectRequest/${r.id}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    </c:if>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+		
         <!-- Weather -->
         <div class="mt-5">
             <h4 class="section-title">Today's Weather</h4>

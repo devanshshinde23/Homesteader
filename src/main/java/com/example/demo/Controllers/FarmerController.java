@@ -19,6 +19,7 @@ import com.example.demo.Model.Farmer;
 import com.example.demo.Model.Crop;
 import com.example.demo.Service.AgenciesService;
 import com.example.demo.Service.FarmerService;
+import com.example.demo.Service.ServiceRequestService;
 
 @Controller
 public class FarmerController {
@@ -28,6 +29,10 @@ public class FarmerController {
 	
 	@Autowired
 	AgenciesService ags ;
+	
+	@Autowired 
+	ServiceRequestService Service;
+	
 	
 	@GetMapping("/FarmerLogin")
 	public String FarmerLogin(HttpSession s1){
@@ -49,30 +54,18 @@ public class FarmerController {
 		return "redirect:/FarmerLogin";
 	}
 	
+
+
 //	@GetMapping("/FarmerDash")
 //	public String Farmerdash(HttpSession s1, Model m) {
-//		Farmer FD=(Farmer)s1.getAttribute("temp");
-//		if(FD!=null) {
-//			
-//			m.addAttribute("kk", FD.getFname());
-//			return "FarmerDash";
-//		}
-//		return "redirect:/FarmerLogin";
+//	    Farmer FD = (Farmer) s1.getAttribute("temp");
+//	    if (FD != null) {
+//	        m.addAttribute("kk", FD.getFname());
+//	        m.addAttribute("agencies", ags.getAllAgencies()); // now strongly typed
+//	        return "FarmerDash";
+//	    }
+//	    return "redirect:/FarmerLogin";
 //	}
-//	
-	
-	
-
-	@GetMapping("/FarmerDash")
-	public String Farmerdash(HttpSession s1, Model m) {
-	    Farmer FD = (Farmer) s1.getAttribute("temp");
-	    if (FD != null) {
-	        m.addAttribute("kk", FD.getFname());
-	        m.addAttribute("agencies", ags.getAllAgencies()); // now strongly typed
-	        return "FarmerDash";
-	    }
-	    return "redirect:/FarmerLogin";
-	}
 
 	@PostMapping("/checkFarmerData")
 	public String Checkfarmer(@RequestParam("username") String u , @RequestParam("password") String p,HttpSession s1, Object f1) {
@@ -125,6 +118,68 @@ public class FarmerController {
 
 
 
+//	@GetMapping("/FarmerDash") 
+//	public String farmerDash(HttpSession session, Model model) 
+//	{
+//		int farmerId = (int) session.getAttribute("fid"); // farmer logged in 
+//		Farmer farmer = ff.findById(farmerId); // summary cards 
+//		
+//		model.addAttribute("farmer", farmer);
+//		model.addAttribute("totalRequests", Service.countAllByFarmer(farmerId)); 
+//		model.addAttribute("approvedRequests", Service.countByFarmerStatus(farmerId, "Approved")); 
+//		model.addAttribute("pendingRequests", Service.countByFarmerStatus(farmerId, "Pending")); // list of requests 
+//		model.addAttribute("requests", Service.getFarmerRequests(farmerId)); 
+//		
+//		return "FarmerDash"; 
+//		
+//	} 
+	
+	@GetMapping("/FarmerDash")
+	public String farmerDash(HttpSession session, Model model) {
+	    // Farmer object stored in session
+	    Farmer farmer = (Farmer) session.getAttribute("temp");
+	    Long farmerId = (Long) session.getAttribute("fid");
+
+	    if (farmer == null || farmerId == null) {
+	        return "redirect:/FarmerLogin";
+	    }
+
+	    // Farmer basic info
+	    model.addAttribute("kk", farmer.getFname());
+	    model.addAttribute("farmer", farmer);
+
+	    // Agencies list
+	    model.addAttribute("agencies", ags.getAllAgencies());
+
+	    // Summary cards
+	    model.addAttribute("totalRequests", Service.countAllByFarmer(farmerId));
+	    model.addAttribute("approvedRequests", Service.countByFarmerStatus(farmerId, "Approved"));
+	    model.addAttribute("pendingRequests", Service.countByFarmerStatus(farmerId, "Pending"));
+
+	    // Requests list
+	    model.addAttribute("requests", Service.getFarmerRequests(farmerId));
+
+	    return "FarmerDash";
+	}
+
+	// Approve request 
+	
+	@PostMapping("/approveRequest/{id}") 
+	public String approveRequest(@PathVariable int id) 
+	{
+		Service.updateStatus(id, "Approved");
+		return "redirect:/FarmerDash"; 
+		
+	} 
+	// Reject request 
+	@PostMapping("/rejectRequest/{id}") 
+	public String rejectRequest(@PathVariable int id) 
+	{
+		Service.updateStatus(id, "Rejected"); 
+		return "redirect:/FarmerDash"; 
+		
+	}
+	
 	
 	
 	
