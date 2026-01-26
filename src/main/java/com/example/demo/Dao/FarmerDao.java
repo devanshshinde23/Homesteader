@@ -74,6 +74,11 @@ public class FarmerDao implements FarmerService{
 	@Override public List<ServiceRequest> getFarmerRequests(Long farmerId) { 
 		return sr.findByFarmer_Fid(farmerId); 
 		}
+	@Override
+	public Farmer findById(int farmerId) {
+		
+		return fr.findByFid( farmerId);
+	}
 	
 
 }

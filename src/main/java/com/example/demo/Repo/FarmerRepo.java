@@ -16,6 +16,8 @@ public interface FarmerRepo extends JpaRepository<Farmer,Integer>{
 	List<Farmer> findByFregion(String name);
 
 	Optional<Farmer> findByFid(Long farmerId);
+
+	Farmer findByFid(int farmerId);
 	
 	
 }

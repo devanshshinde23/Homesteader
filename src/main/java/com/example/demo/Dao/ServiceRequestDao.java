@@ -35,22 +35,7 @@ public class ServiceRequestDao implements ServiceRequestService{
 	@Autowired private SeedRepo seedRepo;
 	@Autowired private HerbRepo herbRepo;
 	
-//	@Override
-//	public ServiceRequest createRequest(Long farmerId, Long agencyId, String type, String details) {
-//		 
-//		 
-//			Farmer farmer = farmerRepo.findByFid(farmerId).orElseThrow(); 
-//			Agencies agency = agencyRepo.findByAid(agencyId).orElseThrow(); 
-//			ServiceRequest req = new ServiceRequest(); 
-//			req.setFarmer(farmer); 
-//			req.setAgency(agency);
-//			req.setServiceType(type);
-//			req.setDetails(details);
-//			req.setStatus("PENDING"); req.setCreatedAt(LocalDateTime.now()); 
-//			
-//			return dao.save(req);
-//		
-//	}
+
 
 	@Override
 	public List<ServiceRequest> getFarmerRequests(Long farmerId) {
@@ -113,62 +98,7 @@ dao.save(req);
 		
 	}
 	
-//	public void buyCrop(Long agencyId, int cropId, int quantity, Agencies agency, Farmer farmer)
-//	 { 
-//		Crop crop = cropRepo.findById(cropId).orElseThrow(); 
-//	ServiceRequest req = new ServiceRequest(); 
-//	req.setAgency(agency);
-//	 req.setFarmer(farmer); 
-//	req.setCrop(crop);
-//	 req.setQuantity(quantity);
-//	 req.setStatus("Pending");
-//	 req.setRequestDate(java.time.LocalDate.now()); 
-//	 dao.save(req);
-//	 }
-//	
-//	public void buyFertilizer(Long agencyId, int fertId, int quantity, Agencies agency, Farmer farmer) 
-//	{ 
-//		Fertilizer fert = fertilizerRepo.findById(fertId).orElseThrow();
-//		ServiceRequest req = new ServiceRequest();
-//		req.setAgency(agency);
-//		req.setFarmer(farmer);
-//		req.setFertilizer(fert);
-//		req.setQuantity(quantity);
-//		req.setStatus("Pending");
-//		req.setRequestDate(java.time.LocalDate.now()); 
-//		dao.save(req); 
-//		
-//	}
-//	
-//	public void buySeed(Long agencyId, int seedId, int quantity, Agencies agency, Farmer farmer) 
-//	{ 
-//		Seed seed = seedRepo.findById(seedId).orElseThrow();
-//		ServiceRequest req = new ServiceRequest();
-//		req.setAgency(agency); 
-//		req.setFarmer(farmer); 
-//		req.setSeed(seed); 
-//		req.setQuantity(quantity);
-//		
-//		req.setStatus("Pending"); 
-//		req.setRequestDate(java.time.LocalDate.now());
-//		dao.save(req); 
-//		
-//	}
-//	
-//	public void buyHerb(Long agencyId, int herbId, int quantity, Agencies agency, Farmer farmer) 
-//	{
-//		Herb herb = herbRepo.findById(herbId).orElseThrow(); 
-//		ServiceRequest req = new ServiceRequest();
-//		req.setAgency(agency);
-//		req.setFarmer(farmer); 
-//		req.setHerb(herb);
-//		req.setQuantity(quantity);
-//		req.setStatus("Pending"); 
-//		req.setRequestDate(java.time.LocalDate.now());
-//		dao.save(req); 
-//		
-//	}
-//	
+
 	
 	public void buyCrop(int cropId, int quantity, Agencies agency) {
 	    Crop crop = cropRepo.findById(cropId).orElseThrow();
@@ -210,15 +140,34 @@ dao.save(req);
 	}
 
 	public void updateStatus1(Long requestId, String status) {
+//		ServiceRequest req = dao.findById(requestId).orElseThrow();
+//		req.setStatus(status);
+//		dao.save(req); 
+		
 		ServiceRequest req = dao.findById(requestId).orElseThrow();
-		req.setStatus(status);
-		dao.save(req); 
+		req.setStatus(status); 
+			if ("Approved".equalsIgnoreCase(status)) 
+			{
+				req.setApprovedDate(LocalDate.now()); 
+				
+			}
+			dao.save(req); 
+		
+	}
+	
+	
+
+	@Override
+	public void save(ServiceRequest req) {
+		dao.save(req);
 		
 	}
 
 	@Override
-	public void save(ServiceRequest req) {
+	public ServiceRequest updateStatus(int id, String status) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+	
 }

@@ -30,6 +30,8 @@ public interface FarmerService {
 	public List<Farmer> fetchData(String name);
 
 	List<ServiceRequest> getFarmerRequests(Long farmerId);
+
+	public Farmer findById(int farmerId);
 	
 	
 

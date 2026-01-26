@@ -15,5 +15,7 @@ public interface ServiceRequestRepository extends JpaRepository<ServiceRequest, 
 	long countByAgency_Aid(Long agencyId);
 	long countByAgency_AidAndStatus(Long agencyId, String status);
 	long countByFarmerFid(Long farmerId);
-	long countByFarmerFidAndStatus(Long farmerId, String status); 
+	long countByFarmerFidAndStatus(Long farmerId, String status);
+	long countByFarmerFid(int farmerId);
+	long countByFarmerFidAndStatus(int farmerId, String status); 
 }
