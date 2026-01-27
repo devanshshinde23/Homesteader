@@ -166,13 +166,21 @@ public class ServiceRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;   // use int for consistency with your other entities
+    private Long id;   // use int for consistency with your other entities
 
     private String type;          // general type (optional, can remove if redundant)
     private Integer quantity;
     private String unit;
 
-    private LocalDate preferredDate;
+    private String initiator;
+    public String getInitiator() {
+		return initiator;
+	}
+	public void setInitiator(String initiator) {
+		this.initiator = initiator;
+	}
+
+	private LocalDate preferredDate;
     private String deliveryMode;
 
     @ManyToOne
@@ -208,11 +216,16 @@ public class ServiceRequest {
 
     // ---------------- Getters & Setters ----------------
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    
 
     public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public void setType(String type) { this.type = type; }
 
     public Integer getQuantity() { return quantity; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
