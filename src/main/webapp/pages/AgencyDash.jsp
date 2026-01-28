@@ -342,6 +342,8 @@
 </div>		
 		
 <!-- CROPS TABLE -->
+
+<a href="javascript:void(0);" id="toggleCrops" class="btn btn-primary mb-3"> <i class="fa-solid fa-wheat-awn me-2"></i> Show Crops </a>
 <h4>Available Crops</h4>
 <table class="table table-striped">
     <thead>
@@ -383,7 +385,6 @@
             <th>Farmer</th>
             <th>Fertilizer Name</th>
             <th>Quantity</th>
-            
             <th>Price</th>
             <th>Action</th>
         </tr>

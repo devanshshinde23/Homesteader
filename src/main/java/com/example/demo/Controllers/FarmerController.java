@@ -111,6 +111,7 @@ public class FarmerController {
 	    Long farmerId = (Long) session.getAttribute("fid");
 	    if (farmerId != null) {
 	        model.addAttribute("requests", ff.getFarmerRequests(farmerId));
+	        
 	        return "FarmerRequests"; // JSP page to show requests
 	    }
 	    return "redirect:/FarmerLogin";
@@ -165,7 +166,7 @@ public class FarmerController {
 	// Approve request 
 	
 	@PostMapping("/approveRequest/{id}") 
-	public String approveRequest(@PathVariable int id) 
+	public String approveRequest(@PathVariable Long id) 
 	{
 		Service.updateStatus(id, "Approved");
 		return "redirect:/FarmerDash"; 
@@ -173,7 +174,7 @@ public class FarmerController {
 	} 
 	// Reject request 
 	@PostMapping("/rejectRequest/{id}") 
-	public String rejectRequest(@PathVariable int id) 
+	public String rejectRequest(@PathVariable Long id) 
 	{
 		Service.updateStatus(id, "Rejected"); 
 		return "redirect:/FarmerDash"; 

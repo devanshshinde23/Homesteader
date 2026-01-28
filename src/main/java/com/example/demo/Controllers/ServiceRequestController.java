@@ -62,12 +62,27 @@ public class ServiceRequestController {
         return "agency/requests";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateStatus(@PathVariable Long id, @RequestParam String status) {
-        service.updateStatus(id, status);
-        return "redirect:/AgencyDash";
-    }
+//    @PostMapping("/update/{id}")
+//    public String updateStatus(@PathVariable Long id, @RequestParam String status) {
+//        service.updateStatus(id, status);
+//        return "redirect:/AgencyDash";
+//    }
     
+    
+    @PostMapping("/update/{id}")
+    public String updateStatus(@PathVariable Long id,
+                               @RequestParam String status,
+                               HttpSession session) {
+        service.updateStatus(id, status);
+
+        if (session.getAttribute("fid") != null) {
+            return "redirect:/FarmerDash";
+        } else if (session.getAttribute("agencyId") != null) {
+            return "redirect:/AgencyDash";
+        }
+        return "redirect:/"; // fallback
+    }
+
     
 
 }
