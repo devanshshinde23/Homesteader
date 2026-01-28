@@ -185,6 +185,8 @@
         <a href="AddSeeds"><i class="fa-solid fa-seedling me-2"></i>Add Seeds Info</a>
         <a href="AddFertilizer"><i class="fa-solid fa-flask me-2"></i> Add Fertilizers Info</a>
         <a href="#"><i class="fa-solid fa-cloud-sun me-2"></i>Weather</a>
+        <a href="javascript:void(0);" id="showRequestLink" > <i class="fa-solid fa-list me-2"></i> Show Request </a>
+        
         <a href="#"><i class="fa-solid fa-landmark me-2"></i>Govt Schemes</a>
         <a href="#"><i class="fa-solid fa-headset me-2"></i>Support</a>
         <a href="javascript:void(0)" onclick="toggleChatbot()">
@@ -288,139 +290,78 @@
 
         </div>
 
+<!-- Hidden section for Count Cards + Request Table -->
+<div id="requestSection" style="display:none;">
 
-<!--
-		<h3>Incoming Requests</h3>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Agency</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-      
-        <c:forEach items="${requests}" var="r">
+<h4 class="section-title">Incoming Buying Requests</h4>
+    <!-- Count Cards -->
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="section-title">Total Requests</h5>
+                    <p>${totalRequests}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="section-title">Approved</h5>
+                    <p>${approvedRequests}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="section-title">Pending</h5>
+                    <p>${pendingRequests}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Table -->
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>${r.agency.username}</td>
-                <td>
-                    <c:if test="${r.crop != null}">Crop: ${r.crop.cropName}</c:if>
-                    <c:if test="${r.fertilizer != null}">Fertilizer: ${r.fertilizer.fertilizerName}</c:if>
-                    <c:if test="${r.seed != null}">Seed: ${r.seed.seedName}</c:if>
-                    <c:if test="${r.herb != null}">Herb: ${r.herb.herbName}</c:if>
-                </td>
-                <td>${r.quantity} ${r.unit}</td>
-                <td>${r.status}</td>
-                <td>
-                    <c:if test="${r.status eq 'Pending'}">
-                        <form action="/approveRequest/${r.id}" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                        </form>
-                        <form action="/rejectRequest/${r.id}" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                        </form>
-                    </c:if>
-                </td>
+                <th>Agency</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Status</th>
             </tr>
-        </c:forEach>
-        
-        <c:forEach items="${requests}" var="r">
-    <tr>
-        <td>${r.agency.username}</td>
-        <td>
-            <c:if test="${r.crop != null}">Crop: ${r.crop.cropName}</c:if>
-            <c:if test="${r.seed != null}">Seed: ${r.seed.seedName}</c:if>
-            <c:if test="${r.fertilizer != null}">Fertilizer: ${r.fertilizer.fertilizerName}</c:if>
-            <c:if test="${r.herb != null}">Herb: ${r.herb.herbName}</c:if>
-        </td>
-        <td>${r.quantity} ${r.unit}</td>
-        <td>${r.status}</td>
-        <td>
-            <c:if test="${r.status eq 'Pending'}">
-                <form action="/approveRequest/${r.id}" method="post" class="d-inline">
-                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                </form>
-                <form action="/rejectRequest/${r.id}" method="post" class="d-inline">
-                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                </form>
-            </c:if>
-        </td>
-    </tr>
-</c:forEach>
-        
-    </tbody>
-</table> -->
-
-<h3>Incoming Buying Requests</h3>
-
-<!-- Summary cards -->
-<div class="row mb-3">
-    <div class="col">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5>Total Requests</h5>
-                <p>${totalRequests}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5>Approved</h5>
-                <p>${approvedRequests}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5>Pending</h5>
-                <p>${pendingRequests}</p>
-            </div>
-        </div>
-    </div>
+        </thead>
+        <tbody>
+            <c:forEach items="${requests}" var="r">
+                <tr>
+                    <td>${r.agency.username}</td>
+                    <td>
+                        <c:if test="${r.crop != null}">Crop: ${r.crop.cropName}</c:if>
+                        <c:if test="${r.seed != null}">Seed: ${r.seed.seedName}</c:if>
+                        <c:if test="${r.fertilizer != null}">Fertilizer: ${r.fertilizer.fertilizerName}</c:if>
+                        <c:if test="${r.herb != null}">Herb: ${r.herb.herbName}</c:if>
+                    </td>
+                    <td>${r.quantity} ${r.unit}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${r.status eq 'Approved'}">
+                                <span class="badge bg-success">Approved</span>
+                            </c:when>
+                            <c:when test="${r.status eq 'Rejected'}">
+                                <span class="badge bg-danger">Rejected</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </div>
 
-<!-- Requests table -->
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Agency</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach items="${requests}" var="r">
-            <tr>
-                <td>${r.agency.username}</td>
-                <td>
-                    <c:if test="${r.crop != null}">Crop: ${r.crop.cropName}</c:if>
-                    <c:if test="${r.seed != null}">Seed: ${r.seed.seedName}</c:if>
-                    <c:if test="${r.fertilizer != null}">Fertilizer: ${r.fertilizer.fertilizerName}</c:if>
-                    <c:if test="${r.herb != null}">Herb: ${r.herb.herbName}</c:if>
-                </td>
-                <td>${r.quantity} ${r.unit}</td>
-                <td>${r.status}</td>
-                <td>
-                    <c:if test="${r.status eq 'Pending'}">
-                        <form action="/approveRequest/${r.id}" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                        </form>
-                        <form action="/rejectRequest/${r.id}" method="post" class="d-inline">
-                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                        </form>
-                    </c:if>
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
 
 		
         <!-- Weather -->
@@ -543,7 +484,23 @@ fetch("/weather?city=satara")
 	.then(data => { 
 	document.getElementById("weather-info").innerHTML =
 		data.weather[0].description + ", " + data.main.temp + "°C"; });
+		
+		
+		
+
+document.getElementById("showRequestLink").addEventListener("click", function() {
+    var section = document.getElementById("requestSection");
+    if (section.style.display === "none") {
+        section.style.display = "block";
+        this.innerHTML = '<i class="fa-solid fa-eye-slash me-2"></i> Hide Request';
+    } else {
+        section.style.display = "none";
+        this.innerHTML = '<i class="fa-solid fa-list me-2"></i> Show Request';
+    }
+});
 </script>
+
+
 
 </html>
 

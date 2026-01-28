@@ -26,10 +26,10 @@ public class Fertilizer {
 	private String category ;
 	
 	@Column(nullable = false)
-	private String quantity;
+	private int quantity;
 	
 	@Column(nullable= false)
-	private String price ;
+	private double price ;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name ="fid" ,nullable=false)
@@ -60,19 +60,19 @@ public class Fertilizer {
 		this.category = category;
 	}
 
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
