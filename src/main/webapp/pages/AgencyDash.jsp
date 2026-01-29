@@ -24,7 +24,7 @@
             height: 100vh;
             width: 250px;
             position: fixed;
-            background: #0d6efd;
+            background: #2d7a32;
             color: white;
             padding-top: 25px;
         }
@@ -38,7 +38,7 @@
         }
 
         .sidebar a:hover {
-            background: #0b5ed7;
+            background: #256428;
         }
 
         /* Content */
@@ -65,6 +65,11 @@
             font-size: 13px;
             padding: 5px 10px;
         } 
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d7a32;
     </style>
 
 </head>
@@ -93,6 +98,20 @@
     <a href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
     <a href="/showFarmers"><i class="bi bi-person-lines-fill"></i> Farmers</a>
     <a href="#"><i class="bi bi-mortarboard"></i> Students</a>
+    
+
+    <!-- Buy Products selector 
+     <label for="productType" class="form-label mt-3 text-white"> -->
+     <a href="javascript:void(0);" id="buyProductsLink" >
+     <i class="fa-solid fa-cart-shopping me-2"></i> Buy  Products </a> 
+     <select id="productType" class="form-select form-select-sm mb-3" style="background-color:#2d7a32 ; color:white ; font-weight:500"> 
+     	<option value="">-- Choose --</option> 
+     		<option value="cropsSection" >🌾 Crops</option> 
+     		<option value="fertilizersSection">🧪 Fertilizers</option> 
+     		<option value="seedsSection">🌱 Seeds</option> 
+     		<option value="herbsSection">🍃 Herbs</option> 
+     		
+     </select>
     <a href="/showRequests"><i class="bi bi-journal-check"></i> Service Requests</a>
     <a href="#"><i class="bi bi-gear"></i> Settings</a>
 
@@ -144,7 +163,7 @@
 
 <div class="card card-custom p-4 mt-4">
 <c:if test="${showRequests}">
-    <h4 class="mb-3">Farmer Service Requests</h4>
+    <h4 class="section-title">Farmer Service Requests</h4>
 
     <table class="table table-hover">
         <thead>
@@ -341,7 +360,173 @@
 		
 </div>		
 		
-<!-- CROPS TABLE -->
+
+<!-- Main content -->
+    <div class="flex-grow-1 p-3">
+        
+        <!-- Product selector (hidden initially) -->
+        <div id="productSelector" style="display:none;">
+            <label for="productType" class="form-label">Select Product Type:</label>
+            <select id="productType" class="form-select w-25">
+                <option value="">-- Choose --</option>
+                <option value="cropsSection">Crops</option>
+                <option value="fertilizersSection">Fertilizers</option>
+                <option value="seedsSection">Seeds</option>
+                <option value="herbsSection">Herbs</option>
+            </select>
+        </div>
+
+		
+        <!-- Crops Table -->
+        <div id="cropsSection" style="display:none;">
+            <h4>Available Crops</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Farmer</th>
+                        <th>Crop Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${crops}" var="c">
+                        <tr>
+                            <td>${c.farmer.fname}</td>
+                            <td>${c.cropName}</td>
+                            <td>${c.quantity}</td>
+                            <td>${c.price}</td>
+                            <td>
+                                <form action="/buyCrop" method="post" class="d-inline">
+                                    <input type="hidden" name="cropId" value="${c.cropId}" />
+                                    <input type="number" name="quantity" min="1" max="${c.quantity}" required />
+                                    <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Fertilizers Table -->
+        <div id="fertilizersSection" style="display:none;">
+            <h4 class="section-title">Available Fertilizers</h4>
+            
+            <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer</th>
+            <th>Fertilizer Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${fertilizers}" var="f">
+            <tr>
+                <td>${f.farmer.fname}</td>
+                <td>${f.fertilizerName}</td>
+                <td>${f.quantity}</td>
+                
+                <td>${f.price}</td>
+                <td>
+                    <form action="/buyFertilizer" method="post" class="d-inline">
+                        <input type="hidden" name="fertilizerId" value="${f.fertilizerId}" />
+                        <input type="number" name="quantity" min="1" max="${f.quantity}" required />
+                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+            
+            <!-- Fertilizer table here -->
+        </div>
+
+        <!-- Seeds Table -->
+        <div id="seedsSection" style="display:none;">
+            <h4 class="section">Available Seeds</h4>
+            
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer</th>
+            <th>Seed Name</th>
+            <th>Quantity</th>
+            
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${seeds}" var="s">
+            <tr>
+                <td>${s.farmer.fname}</td>
+                <td>${s.seedName}</td>
+                <td>${s.quantity}</td>
+                
+                <td>${s.price}</td>
+                <td>
+                    <form action="/buySeed" method="post" class="d-inline">
+                        <input type="hidden" name="seedId" value="${s.seedid}" />
+                        <input type="number" name="quantity" min="1" max="${s.quantity}" required />
+                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+            
+            
+        </div>
+
+        <!-- Herbs Table -->
+        <div id="herbsSection" style="display:none;">
+            <h4>Available Herbs</h4>
+            
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer</th>
+            <th>Herb Name</th>
+            <th>Quantity</th>
+            
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${herbs}" var="h">
+            <tr>
+                <td>${h.farmer.fname}</td>
+                <td>${h.herbName}</td>
+                <td>${h.quantity}</td>
+                
+                <td>${h.price}</td>
+                <td>
+                    <form action="/buyHerb" method="post" class="d-inline">
+                        <input type="hidden" name="herbId" value="${h.herbid}" />
+                        <input type="number" name="quantity" min="1" max="${h.quantity}" required />
+                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+		
+</div>
+            
+        </div>
+    </div>
+
+
+<!-- CROPS TABLE 
 
 <a href="javascript:void(0);" id="toggleCrops" class="btn btn-primary mb-3"> <i class="fa-solid fa-wheat-awn me-2"></i> Show Crops </a>
 <h4>Available Crops</h4>
@@ -375,111 +560,29 @@
         </c:forEach>
     </tbody>
 </table>
+-->
 
 
-<!-- FERTILIZER TABLE -->
-<h4>Available Fertilizers</h4>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Farmer</th>
-            <th>Fertilizer Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach items="${fertilizers}" var="f">
-            <tr>
-                <td>${f.farmer.fname}</td>
-                <td>${f.fertilizerName}</td>
-                <td>${f.quantity}</td>
-                
-                <td>${f.price}</td>
-                <td>
-                    <form action="/buyFertilizer" method="post" class="d-inline">
-                        <input type="hidden" name="fertilizerId" value="${f.fertilizerId}" />
-                        <input type="number" name="quantity" min="1" max="${f.quantity}" required />
-                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
 
-
-<!-- SEEDS TABLE -->
-<h4>Available Seeds</h4>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Farmer</th>
-            <th>Seed Name</th>
-            <th>Quantity</th>
-            
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach items="${seeds}" var="s">
-            <tr>
-                <td>${s.farmer.fname}</td>
-                <td>${s.seedName}</td>
-                <td>${s.quantity}</td>
-                
-                <td>${s.price}</td>
-                <td>
-                    <form action="/buySeed" method="post" class="d-inline">
-                        <input type="hidden" name="seedId" value="${s.seedid}" />
-                        <input type="number" name="quantity" min="1" max="${s.quantity}" required />
-                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
-
-
-<!-- HERBS TABLE -->
-<h4>Available Herbs</h4>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Farmer</th>
-            <th>Herb Name</th>
-            <th>Quantity</th>
-            
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach items="${herbs}" var="h">
-            <tr>
-                <td>${h.farmer.fname}</td>
-                <td>${h.herbName}</td>
-                <td>${h.quantity}</td>
-                
-                <td>${h.price}</td>
-                <td>
-                    <form action="/buyHerb" method="post" class="d-inline">
-                        <input type="hidden" name="herbId" value="${h.herbid}" />
-                        <input type="number" name="quantity" min="1" max="${h.quantity}" required />
-                        <button type="submit" class="btn btn-success btn-sm">Buy</button>
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
-		
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.getElementById("productType").addEventListener("change", function() {
+        // Hide all sections
+        document.getElementById("cropsSection").style.display = "none";
+        document.getElementById("fertilizersSection").style.display = "none";
+        document.getElementById("seedsSection").style.display = "none";
+        document.getElementById("herbsSection").style.display = "none";
+
+        // Show selected section
+        if (this.value) {
+            document.getElementById(this.value).style.display = "block";
+        }
+    });
+</script>
+
+
 
 </body>
 </html>
