@@ -231,7 +231,7 @@
                 <div class="card-box">
                     <i class="fa-solid fa-landmark"></i>
                     <h6>Government Schemes</h6>
-                    <p>View subsidies & benefits.</p>
+                    <p>View Subsidies and benefits.</p>
                 </div>
             </div>
         </div>
